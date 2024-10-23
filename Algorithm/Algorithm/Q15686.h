@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -110,8 +111,8 @@ public:
 			return INF;
 
 		if (depth == _M)
-			return CalcDist(visited); 
-		for (int nxtPos = pos+1; nxtPos < _dist.size(); ++nxtPos)
+			return CalcDist(visited);
+		for (int nxtPos = pos + 1; nxtPos < _dist.size(); ++nxtPos)
 		{
 			visited[nxtPos] = true;
 			int temp = DFS(visited, nxtPos, depth + 1);
@@ -134,12 +135,3 @@ private:
 	vector<pair<int, int>> _chicken;
 	vector<vector<int>> _dist;
 };
-
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q15686>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}

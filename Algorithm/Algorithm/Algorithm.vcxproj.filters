@@ -41,5 +41,8 @@
     <ClInclude Include="Q6603.h">
       <Filter>Header Files\BackTracking</Filter>
     </ClInclude>
+    <ClInclude Include="Q15686.h">
+      <Filter>Header Files\BackTracking</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

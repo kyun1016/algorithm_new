@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Q13505.h" />
+    <ClInclude Include="Q15686.h" />
     <ClInclude Include="Q5670.h" />
     <ClInclude Include="Q6603.h" />
   </ItemGroup>
