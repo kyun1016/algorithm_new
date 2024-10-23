@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -110,7 +111,7 @@ public:
 	{
 		cin >> _N;
 		_arr.resize(_N);
-		
+
 
 	}
 	virtual void Solution() override
@@ -125,19 +126,10 @@ public:
 			maxValue = trie.QueryXOR(_arr[i]);
 			ret = ret >= (maxValue ^ _arr[i]) ? ret : (maxValue ^ _arr[i]);
 		}
-		
+
 		cout << ret << endl;
 	}
 private:
 	int _N;
 	vector<unsigned int> _arr;
 };
-
-int main()
-{
-    unique_ptr<QBase> q = make_unique<Q13505>();
-    q->Init();
-    q->Solve();
-
-    return 0;
-}

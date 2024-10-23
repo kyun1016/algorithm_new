@@ -1,3 +1,4 @@
+#pragma once
 #include "QBase.h"
 
 class Q5052 : public QBase

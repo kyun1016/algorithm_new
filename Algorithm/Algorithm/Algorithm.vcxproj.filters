@@ -32,5 +32,8 @@
     <ClInclude Include="Q5670.h">
       <Filter>Header Files\Trie</Filter>
     </ClInclude>
+    <ClInclude Include="Q13505.h">
+      <Filter>Header Files\Trie</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
