@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -52,7 +53,7 @@ public:
 	{
 		MAX_CNT = 6,
 	};
-	Q6603() 
+	Q6603()
 		: _k(0)
 		, _ret()
 	{};
@@ -115,12 +116,3 @@ private:
 	vector<int> _arr;
 	int _ret[MAX_CNT];
 };
-
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q6603>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}

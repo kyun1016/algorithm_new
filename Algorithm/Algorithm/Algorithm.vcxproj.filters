@@ -16,6 +16,9 @@
     <Filter Include="Header Files\Trie">
       <UniqueIdentifier>{68b9182b-ae44-4deb-8ff4-31bc6be18a34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BackTracking">
+      <UniqueIdentifier>{0ddddcb0-c253-4719-860f-d1160469a43d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="Q13505.h">
       <Filter>Header Files\Trie</Filter>
+    </ClInclude>
+    <ClInclude Include="Q6603.h">
+      <Filter>Header Files\BackTracking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
