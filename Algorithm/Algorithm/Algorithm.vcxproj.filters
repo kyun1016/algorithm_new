@@ -59,5 +59,8 @@
     <ClInclude Include="DFS_Q14500.h">
       <Filter>Header Files\DFS</Filter>
     </ClInclude>
+    <ClInclude Include="DP_Q14501.h">
+      <Filter>Header Files\DP</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

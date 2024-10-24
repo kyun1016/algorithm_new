@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -52,7 +53,7 @@ private:
 class Q1764 : public QBase
 {
 public:
-	Q1764()	{}
+	Q1764() {}
 	virtual ~Q1764() {}
 
 	virtual void Input()
@@ -110,11 +111,11 @@ public:
 
 };
 
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q1764>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q1764>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}
