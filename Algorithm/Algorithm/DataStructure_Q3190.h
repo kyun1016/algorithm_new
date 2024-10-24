@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -69,7 +70,7 @@ public:
 		for (int i = 0; i < temp; ++i)
 		{
 			cin >> y >> x;
-			_arr[y-1][x-1] = 2;
+			_arr[y - 1][x - 1] = 2;
 		}
 
 		cin >> temp;
@@ -179,11 +180,11 @@ private:
 	queue<Data> _TimeTable;
 };
 
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q3190>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q3190>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}
