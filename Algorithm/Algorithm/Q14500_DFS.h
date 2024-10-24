@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -162,7 +163,7 @@ public:
 				_visited[nPos.y][nPos.x] = false;
 			}
 		}
-		
+
 		return ret;
 	}
 
@@ -180,12 +181,3 @@ private:
 	vector<vector<bool>> _visited;
 	vector<vector<int>> _map;
 };
-
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q14500>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}

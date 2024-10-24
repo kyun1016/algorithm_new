@@ -19,6 +19,12 @@
     <Filter Include="Header Files\BackTracking">
       <UniqueIdentifier>{0ddddcb0-c253-4719-860f-d1160469a43d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BruteForce">
+      <UniqueIdentifier>{9c486332-81c3-475a-b92e-fa57a2ecf988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DFS">
+      <UniqueIdentifier>{df8913a5-1a37-4a8e-ab32-9866033fe0f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -43,6 +49,12 @@
     </ClInclude>
     <ClInclude Include="Q15686.h">
       <Filter>Header Files\BackTracking</Filter>
+    </ClInclude>
+    <ClInclude Include="Q14500_BruteForce.h">
+      <Filter>Header Files\BruteForce</Filter>
+    </ClInclude>
+    <ClInclude Include="Q14500_DFS.h">
+      <Filter>Header Files\DFS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
