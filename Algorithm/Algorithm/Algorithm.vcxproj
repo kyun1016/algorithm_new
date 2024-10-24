@@ -127,17 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Q5052.h" />
+    <ClCompile Include="Trie_Q5052.h" />
     <ClCompile Include="QBase.h" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Q13505.h" />
-    <ClInclude Include="Q14500_BruteForce.h" />
-    <ClInclude Include="Q14500_DFS.h" />
-    <ClInclude Include="Q15686.h" />
-    <ClInclude Include="Q5670.h" />
-    <ClInclude Include="Q6603.h" />
+    <ClInclude Include="Trie_Q13505.h" />
+    <ClInclude Include="BruteForce_Q14500.h" />
+    <ClInclude Include="DFS_Q14500.h" />
+    <ClInclude Include="BackTracking_DFS_Q15686.h" />
+    <ClInclude Include="Trie_Q5670.h" />
+    <ClInclude Include="BackTracking_DFS_Q6603.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

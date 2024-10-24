@@ -25,6 +25,9 @@
     <Filter Include="Header Files\DFS">
       <UniqueIdentifier>{df8913a5-1a37-4a8e-ab32-9866033fe0f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DP">
+      <UniqueIdentifier>{eff33dce-bc4a-4ba8-b721-6f0a41327735}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,27 +36,27 @@
     <ClCompile Include="QBase.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Q5052.h">
+    <ClCompile Include="Trie_Q5052.h">
       <Filter>Header Files\Trie</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Q5670.h">
+    <ClInclude Include="Trie_Q5670.h">
       <Filter>Header Files\Trie</Filter>
     </ClInclude>
-    <ClInclude Include="Q13505.h">
+    <ClInclude Include="Trie_Q13505.h">
       <Filter>Header Files\Trie</Filter>
     </ClInclude>
-    <ClInclude Include="Q6603.h">
+    <ClInclude Include="BackTracking_DFS_Q6603.h">
       <Filter>Header Files\BackTracking</Filter>
     </ClInclude>
-    <ClInclude Include="Q15686.h">
+    <ClInclude Include="BackTracking_DFS_Q15686.h">
       <Filter>Header Files\BackTracking</Filter>
     </ClInclude>
-    <ClInclude Include="Q14500_BruteForce.h">
+    <ClInclude Include="BruteForce_Q14500.h">
       <Filter>Header Files\BruteForce</Filter>
     </ClInclude>
-    <ClInclude Include="Q14500_DFS.h">
+    <ClInclude Include="DFS_Q14500.h">
       <Filter>Header Files\DFS</Filter>
     </ClInclude>
   </ItemGroup>

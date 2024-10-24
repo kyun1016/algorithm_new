@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -56,8 +57,8 @@ public:
 	{
 		cin >> _N;
 		_arr.resize(_N);
-		for(int i=0; i<_N; ++i)
-		{ 
+		for (int i = 0; i < _N; ++i)
+		{
 			cin >> _arr[i].T >> _arr[i].P;
 		}
 	}
@@ -81,7 +82,7 @@ public:
 		cout << DP(0, 0) << endl;
 	}
 
-	
+
 private:
 	int _N;
 	struct Query
@@ -91,12 +92,3 @@ private:
 	};
 	vector<Query> _arr;
 };
-
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q14501>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
