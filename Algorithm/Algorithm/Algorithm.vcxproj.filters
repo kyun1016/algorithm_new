@@ -43,6 +43,9 @@
     <Filter Include="Header Files\Dijkstra">
       <UniqueIdentifier>{a8e113f5-a550-4e48-9f59-b17db7fa1219}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Greedy">
+      <UniqueIdentifier>{dac9f118-ea6f-4b62-87a0-398ad8221bf5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="DFS_Q1987.h">
       <Filter>Header Files\DFS</Filter>
+    </ClInclude>
+    <ClInclude Include="Greedy_Q1789.h">
+      <Filter>Header Files\Greedy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
