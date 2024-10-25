@@ -142,6 +142,7 @@
     <ClInclude Include="Greedy_Q16496.h" />
     <ClInclude Include="Greedy_Q1715.h" />
     <ClInclude Include="Greedy_Q1789.h" />
+    <ClInclude Include="Greedy_Q18185.h" />
     <ClInclude Include="Kruskal_BFS_Q17472.h" />
     <ClInclude Include="Trie_Q13505.h" />
     <ClInclude Include="BruteForce_Q14500.h" />
