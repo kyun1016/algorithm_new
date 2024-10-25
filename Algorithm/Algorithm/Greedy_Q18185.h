@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -60,8 +61,8 @@ public:
 	virtual void Input()
 	{
 		cin >> _N;
-		_arr.resize(_N+2, 0);
-		for (int i=0; i<_N;++i)
+		_arr.resize(_N + 2, 0);
+		for (int i = 0; i < _N; ++i)
 			cin >> _arr[i];
 	}
 
@@ -110,11 +111,11 @@ private:
 /*--------------------
 * main
 --------------------*/
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q18185>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q18185>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}

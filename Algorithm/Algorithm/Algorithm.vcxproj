@@ -139,6 +139,7 @@
     <ClInclude Include="DFS_Q1987.h" />
     <ClInclude Include="Dijkstra_Q1916r.h" />
     <ClInclude Include="DP_Q14501.h" />
+    <ClInclude Include="Greedy_Q16496.h" />
     <ClInclude Include="Greedy_Q1715.h" />
     <ClInclude Include="Greedy_Q1789.h" />
     <ClInclude Include="Kruskal_BFS_Q17472.h" />
