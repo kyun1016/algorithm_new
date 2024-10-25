@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -138,11 +139,11 @@ private:
 	vector<vector<int>> _arr;
 };
 
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q2468>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q2468>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}

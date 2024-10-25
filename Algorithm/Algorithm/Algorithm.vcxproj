@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructure_Q1764.h" />
+    <ClInclude Include="DataStructure_Q3190.h" />
     <ClInclude Include="DP_Q14501.h" />
     <ClInclude Include="Trie_Q13505.h" />
     <ClInclude Include="BruteForce_Q14500.h" />

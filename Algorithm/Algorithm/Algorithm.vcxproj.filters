@@ -31,6 +31,9 @@
     <Filter Include="Header Files\DataStructure">
       <UniqueIdentifier>{eda8819e-4d91-4ec6-8054-804fd441b41a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Tree">
+      <UniqueIdentifier>{5326a6db-b6d0-4469-b0a7-f57c77f9ccc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="DataStructure_Q1764.h">
       <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructure_Q3190.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
