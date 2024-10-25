@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -116,7 +117,7 @@ public:
 
 		//	cout << endl;
 		//}
-		
+
 		cout << ret << endl;
 	}
 	virtual void Delete()
@@ -151,12 +152,12 @@ private:
 /*--------------------
 * main
 --------------------*/
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q4963>();
-	q->Init();
-	q->Solve();
-
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q4963>();
+//	q->Init();
+//	q->Solve();
+//
+//
+//	return 0;
+//}

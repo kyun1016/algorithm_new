@@ -40,6 +40,9 @@
     <Filter Include="Header Files\Kruskal">
       <UniqueIdentifier>{7c527b14-056b-4e2b-a12a-cfaaf8847c14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Dijkstra">
+      <UniqueIdentifier>{a8e113f5-a550-4e48-9f59-b17db7fa1219}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="Kruskal_BFS_Q17472.h">
       <Filter>Header Files\Kruskal</Filter>
+    </ClInclude>
+    <ClInclude Include="Dijkstra_Q1916r.h">
+      <Filter>Header Files\Dijkstra</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
