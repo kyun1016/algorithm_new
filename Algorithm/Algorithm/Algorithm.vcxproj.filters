@@ -37,6 +37,9 @@
     <Filter Include="Header Files\BFS">
       <UniqueIdentifier>{733205b9-0e93-465f-94d9-bfe7fdc5fc8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Kruskal">
+      <UniqueIdentifier>{7c527b14-056b-4e2b-a12a-cfaaf8847c14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="DataStructure_Q3190.h">
       <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Kruskal_BFS_Q17472.h">
+      <Filter>Header Files\Kruskal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

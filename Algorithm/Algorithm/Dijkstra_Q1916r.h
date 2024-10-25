@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -110,7 +111,7 @@ void Q1916::FloydInput()
 void Q1916::DijkstraInput()
 {
 	cin >> _N >> _M;
-	_data.resize(_N+1);
+	_data.resize(_N + 1);
 
 	int begin, end, dist;
 	for (int i = 0; i < _M; ++i)
@@ -172,12 +173,12 @@ void Q1916::FloydSolution()
 /*--------------------
 * main
 --------------------*/
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q1916>();
-	q->Init();
-	q->Solve();
-
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q1916>();
+//	q->Init();
+//	q->Solve();
+//
+//
+//	return 0;
+//}
