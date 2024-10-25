@@ -104,5 +104,8 @@
     <ClInclude Include="Greedy_Q1789.h">
       <Filter>Header Files\Greedy</Filter>
     </ClInclude>
+    <ClInclude Include="Greedy_Q1715.h">
+      <Filter>Header Files\Greedy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
