@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -144,8 +145,8 @@ void Q17472::BFSFindIsland()
 			}
 		}
 	}
-	_parent.resize(num+1);
-	for (int i = 0; i < num+1; ++i)
+	_parent.resize(num + 1);
+	for (int i = 0; i < num + 1; ++i)
 	{
 		_parent[i] = i;
 	}
@@ -241,11 +242,11 @@ void Q17472::Solution()
 	cout << ret << endl;
 }
 
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q17472>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q17472>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}

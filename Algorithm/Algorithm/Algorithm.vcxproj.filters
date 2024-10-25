@@ -34,6 +34,9 @@
     <Filter Include="Header Files\Tree">
       <UniqueIdentifier>{5326a6db-b6d0-4469-b0a7-f57c77f9ccc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BFS">
+      <UniqueIdentifier>{733205b9-0e93-465f-94d9-bfe7fdc5fc8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,8 +74,11 @@
     <ClInclude Include="DataStructure_Q1764.h">
       <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
+    <ClInclude Include="BFS_Q2468.h">
+      <Filter>Header Files\BFS</Filter>
+    </ClInclude>
     <ClInclude Include="DataStructure_Q3190.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

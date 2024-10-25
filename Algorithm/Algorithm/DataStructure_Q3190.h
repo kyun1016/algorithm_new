@@ -48,10 +48,10 @@ public:
 		Delete();
 	}
 };
-class Q16029 : public QBase
+class Q3190 : public QBase
 {
 public:
-	Q16029()
+	Q3190()
 		: _N(0)
 	{
 		_dir.x = 1;

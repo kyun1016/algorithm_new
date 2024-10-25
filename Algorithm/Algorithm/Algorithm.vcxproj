@@ -132,6 +132,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BFS_Q2468.h" />
     <ClInclude Include="DataStructure_Q1764.h" />
     <ClInclude Include="DataStructure_Q3190.h" />
     <ClInclude Include="DP_Q14501.h" />
