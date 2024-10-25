@@ -92,5 +92,8 @@
     <ClInclude Include="Dijkstra_Q1916r.h">
       <Filter>Header Files\Dijkstra</Filter>
     </ClInclude>
+    <ClInclude Include="BFS_Q4963.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
