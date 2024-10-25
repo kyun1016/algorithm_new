@@ -93,7 +93,10 @@
       <Filter>Header Files\Dijkstra</Filter>
     </ClInclude>
     <ClInclude Include="BFS_Q4963.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\BFS</Filter>
+    </ClInclude>
+    <ClInclude Include="DFS_Q1987.h">
+      <Filter>Header Files\DFS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

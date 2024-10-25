@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -49,7 +50,7 @@ public:
 };
 
 /*--------------------
-* Q1987
+* Q1789
 --------------------*/
 class Q1789 : public QBase
 {
@@ -64,9 +65,9 @@ public:
 		while (true)
 		{
 			// cout <<idx << ":" << _arr[idx] << endl;
-			_arr.push_back(diff++ + _arr[_arr.size()-1]);
-			
-			if (_arr[_arr.size()-1] >= INF)
+			_arr.push_back(diff++ + _arr[_arr.size() - 1]);
+
+			if (_arr[_arr.size() - 1] >= INF)
 				break;
 		}
 	}
@@ -104,11 +105,11 @@ private:
 /*--------------------
 * main
 --------------------*/
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q1789>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q1789>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}
