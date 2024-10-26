@@ -49,58 +49,63 @@ public:
 };
 
 /*--------------------
-* Q10158
+* Q1034
 --------------------*/
-class Q10158 : public QBase
+class Q1034 : public QBase
 {
 public:
-	struct Pos
-	{
-		int x;
-		int y;
-	};
-public:
-	Q10158()
-		:_dir({ 1,1 })
-	{}
-	virtual ~Q10158() = default;
+	Q1034() = default;
+	virtual ~Q1034() = default;
 
 	virtual void Input()
 	{
-		cin >> _maxPos.x >> _maxPos.y;
-		cin >> _pos.x >> _pos.y;
-		cin >> _t;
+		cin >> _N >> _M;
+		_arr.resize(_N);
+		for (int y = 0; y < _N; ++y)
+			cin >> _arr[y];
+		cin >> _K;
 	}
 
 	virtual void Solution()
 	{
-		_pos.x += _t;
-		_pos.x %= _maxPos.x * 2;
-		_pos.y += _t;
-		_pos.y %= _maxPos.y * 2;
+		unordered_map<string, int> table;
+		for (const auto& str : _arr)
+		{
+			int cntZero = 0;
+			for (const auto& c : str)
+				if (c == '0')
+					++cntZero;
 
-		if (_pos.x >= _maxPos.x)
-			_pos.x = 2 * _maxPos.x - _pos.x;
-		if (_pos.y >= _maxPos.y)
-			_pos.y = 2 * _maxPos.y - _pos.y;
+			if (cntZero > _K || cntZero % 2 != _K % 2)
+				continue;
 
-		cout << _pos.x << " " << _pos.y;
+			if (table.find(str) == table.end())
+				table.insert({ str, 1 });
+			else
+				table[str]++;
+		}
+
+		int ret = 0;
+		for (const auto& i : table)
+			ret = ret > i.second ? ret : i.second;
+
+		cout << ret;
 	}
 private:
-	Pos _maxPos;
-	Pos _pos;
-	Pos _dir;
-	int _t;
+	int _N;
+	int _M;
+	int _K;
+	vector<string> _arr;
 };
 
 /*--------------------
 * main
 --------------------*/
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q10158>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q1034>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}
