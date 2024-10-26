@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClInclude Include="BFS_Q2468.h" />
     <ClInclude Include="BFS_Q4963.h" />
+    <ClInclude Include="BinarySearch_Q2143.h" />
     <ClInclude Include="DataStructure_Q1764.h" />
     <ClInclude Include="DataStructure_Q3190.h" />
     <ClInclude Include="DFS_Q1987.h" />

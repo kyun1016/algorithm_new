@@ -55,6 +55,9 @@
     <Filter Include="Header Files\BinarySearch">
       <UniqueIdentifier>{31bc9684-b048-43ac-8114-257972605fd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MinimumSpanningTree">
+      <UniqueIdentifier>{c3f5a48c-97e0-409a-8319-d4fe71f5adf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="String_Q12904.h">
       <Filter>Header Files\String</Filter>
+    </ClInclude>
+    <ClInclude Include="BinarySearch_Q2143.h">
+      <Filter>Header Files\BinarySearch</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

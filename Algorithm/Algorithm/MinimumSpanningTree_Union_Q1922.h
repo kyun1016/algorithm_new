@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <queue>
@@ -114,7 +115,7 @@ public:
 	{
 		if (_parent[a] == a)
 			return a;
-		
+
 		return _parent[a] = GetParent(_parent[a]);
 	}
 	void UnionParent(int a, int b)
@@ -143,11 +144,11 @@ private:
 /*--------------------
 * main
 --------------------*/
-int main()
-{
-	unique_ptr<QBase> q = make_unique<Q1922>();
-	q->Init();
-	q->Solve();
-
-	return 0;
-}
+//int main()
+//{
+//	unique_ptr<QBase> q = make_unique<Q1922>();
+//	q->Init();
+//	q->Solve();
+//
+//	return 0;
+//}
