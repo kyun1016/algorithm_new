@@ -52,6 +52,9 @@
     <Filter Include="Header Files\Ad-hoc">
       <UniqueIdentifier>{586683f1-0fe3-47e3-9e09-ee23055fb539}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BinarySearch">
+      <UniqueIdentifier>{31bc9684-b048-43ac-8114-257972605fd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,7 +66,10 @@
     <ClCompile Include="Trie_Q5052.h">
       <Filter>Header Files\Trie</Filter>
     </ClCompile>
-    <ClCompile Include="Ad-hoc_Q1034.cpp">
+    <ClCompile Include="Ad-hoc_Q1034.h">
+      <Filter>Header Files\Ad-hoc</Filter>
+    </ClCompile>
+    <ClCompile Include="Ad-hoc_Q10158.h">
       <Filter>Header Files\Ad-hoc</Filter>
     </ClCompile>
   </ItemGroup>

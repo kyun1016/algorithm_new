@@ -127,7 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Ad-hoc_Q1034.cpp" />
+    <ClCompile Include="Ad-hoc_Q10158.h" />
+    <ClCompile Include="Ad-hoc_Q1034.h" />
     <ClCompile Include="Trie_Q5052.h" />
     <ClCompile Include="QBase.h" />
     <ClCompile Include="main.cpp" />
