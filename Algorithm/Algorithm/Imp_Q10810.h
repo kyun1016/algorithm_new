@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -116,7 +117,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -156,7 +157,7 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
@@ -178,7 +179,7 @@ private:
 #endif
 		cin >> _N >> _M;
 		_arr.resize(_M, std::vector<uint16_t>(3, 0));
-		for(auto& a: _arr)
+		for (auto& a : _arr)
 			cin >> a[0] >> a[1] >> a[2];
 	}
 	virtual void Solution(const int& testCase)
@@ -191,7 +192,7 @@ private:
 		std::vector<uint16_t> ans(_N, 0);
 
 		for (const auto& a : _arr)
-			for (uint16_t i = a[0]-1; i < a[1]; ++i)
+			for (uint16_t i = a[0] - 1; i < a[1]; ++i)
 				ans[i] = a[2];
 
 		for (const auto& a : ans)
