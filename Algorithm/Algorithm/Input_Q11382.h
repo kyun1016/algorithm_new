@@ -57,7 +57,7 @@ private:
 	virtual void Input() = 0;
 	virtual void Solution() = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
@@ -72,8 +72,8 @@ public:
 		, _B(0)
 		, _C(0)
 	{}
-	Q11382(const Q11382& rhs) 
-		: QBase(rhs) 
+	Q11382(const Q11382& rhs)
+		: QBase(rhs)
 		, _A(rhs._A)
 		, _B(rhs._B)
 		, _C(rhs._C)
@@ -92,7 +92,7 @@ public:
 	virtual ~Q11382() = default;
 
 private:
-	virtual void Input() 
+	virtual void Input()
 	{
 		std::cin >> _A >> _B >> _C;
 		assert(_A >= 1 && _A <= 1000000000000);

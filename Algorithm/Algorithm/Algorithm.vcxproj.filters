@@ -58,6 +58,12 @@
     <Filter Include="Header Files\MinimumSpanningTree">
       <UniqueIdentifier>{c3f5a48c-97e0-409a-8319-d4fe71f5adf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sweeping">
+      <UniqueIdentifier>{cc1c64e9-773f-4b9f-ba70-79aa502256b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{24bae0f5-4115-47d7-9549-7ae1620c0ff5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -139,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="BinarySearch_Q2143.h">
       <Filter>Header Files\BinarySearch</Filter>
+    </ClInclude>
+    <ClInclude Include="MinimumSpanningTree_Union_Q1922.h">
+      <Filter>Header Files\MinimumSpanningTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Sweeping_Q5419.h">
+      <Filter>Header Files\Sweeping</Filter>
+    </ClInclude>
+    <ClInclude Include="Input_Q11382.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

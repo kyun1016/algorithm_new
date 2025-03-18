@@ -146,9 +146,12 @@
     <ClInclude Include="Greedy_Q1715.h" />
     <ClInclude Include="Greedy_Q1789.h" />
     <ClInclude Include="Greedy_Q18185.h" />
+    <ClInclude Include="Input_Q11382.h" />
     <ClInclude Include="Kruskal_BFS_Q17472.h" />
+    <ClInclude Include="MinimumSpanningTree_Union_Q1922.h" />
     <ClInclude Include="String_Q12904.h" />
     <ClInclude Include="String_Q9935.h" />
+    <ClInclude Include="Sweeping_Q5419.h" />
     <ClInclude Include="Trie_Q13505.h" />
     <ClInclude Include="BruteForce_Q14500.h" />
     <ClInclude Include="DFS_Q14500.h" />
