@@ -1,1 +1,1 @@
-long long long long long int
+long int

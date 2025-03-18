@@ -73,6 +73,9 @@
     <Filter Include="TestData\Q25314">
       <UniqueIdentifier>{9a1033c6-0a55-4301-b0a1-93ec3490f107}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{7aebf530-dc0d-49c3-9059-3d1240af11a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

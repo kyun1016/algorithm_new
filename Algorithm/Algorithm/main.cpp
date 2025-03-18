@@ -62,9 +62,23 @@ public:
 		ofp.close();
 	}
 
+	static inline std::ifstream LoadTestFile(const std::string& dir = "./TestData/Q1/", const std::string& filename = "Input1.txt")
+	{
+		std::string line;
+		std::ifstream fp(dir + filename);
+
+		// std::cout << "*Info, Load Input file: " << dir + filename << "\n";
+		assert(fp.is_open());
+
+		// while (getline(fp, line)) {
+		// 	std::cout << line << std::endl;
+		// }
+
+		return fp;
+	}
+
 	static inline void SaveTest(const std::string& dir = "./TestData/Q1/", const int& num = 1)
 	{
-		
 		for (int i = 1; i <= num; ++i)
 		{
 			std::string inputFileName = "Input" + std::to_string(i) + ".txt";
@@ -78,26 +92,32 @@ public:
 			SaveTestFile(dir, outputFileName);
 			std::cout << "*Info, Finish Onput file: " << dir + outputFileName << "\n";
 		}
-		
 	}
 
-	static inline std::ifstream LoadTestInput(const int idx = 1)
+	static inline std::ifstream LoadTestInput(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
+		std::string filename = "Input" + std::to_string(testCase) + ".txt";
+		return LoadTestFile(dir, filename);
+	}
+
+	static inline std::ifstream LoadTestOutput(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
+	{
+		std::string filename = "Output" + std::to_string(testCase) + ".txt";
+		return LoadTestFile(dir, filename);
+	}
+
+	static inline void Score(std::vector<std::string>& ans, const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	{
+		std::ifstream ifp = LoadTestOutput(dir, testCase);
+
 		std::string line;
-		std::string fileName = "TestData/Input/Input" + std::to_string(idx) + ".txt";
-
-		std::ifstream fp(fileName);
-		
-		if (fp.is_open()) {
-			while (getline(fp, line)) {
-				std::cout << line << std::endl;
-			}
+		uint16_t i = 0;
+		while (getline(ifp, line)) {
+			std::cout << ans[i] << std::endl;
+			assert(i <= ans.size());
+			assert(line == ans[i++]);
+			std::cout << "*Info, [" << i << "/" << ans.size() << "] Test Pass\n";
 		}
-		else {
-			std::cout << "Unable to open file: " << fileName << std::endl;
-		}
-
-		return fp;
 	}
 };
 
@@ -113,15 +133,15 @@ public:
 	virtual ~QBase() = default;
 
 public:
-	virtual void Solve()
+	virtual void Solve(const int& testCase = 1)
 	{
-		Input();
-		Solution();
+		Input(testCase);
+		Solution(testCase);
 		Delete();
 	}
 private:
-	virtual void Input() = 0;
-	virtual void Solution() = 0;
+	virtual void Input(const int& testCase) = 0;
+	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
 	
 };
@@ -152,22 +172,30 @@ public:
 	virtual ~Q25314() = default;
 
 private:
-	virtual void Input() 
+	virtual void Input(const int& testCase)
 	{
-#if defined(DEBUG) || defined(_DEBUG) 
-		std::ifstream fp = QHelper::LoadTestInput();
-		
+#if defined(DEBUG) || defined(_DEBUG)
+		std::ifstream fp = QHelper::LoadTestInput("./TestData/Q25314/", testCase);
 		fp >> _A;
+		std::cout << _A << std::endl;
 #else
 		std::cin >> _A;
 #endif
 		
 		assert(_A >= 4 && _A <= 1000);
 	}
-	virtual void Solution()
+	virtual void Solution(const int& testCase)
 	{
+#if defined(DEBUG) || defined(_DEBUG)
+		std::vector<std::string> ans;
+		ans.push_back(std::string());
+		for (uint16_t i = 0; i < _A / 4; ++i) ans[0] += "long ";
+		ans[0] += "int";
+		QHelper::Score(ans, "./TestData/Q25314/", testCase);
+#else
 		for (uint16_t i = 0; i < _A / 4; ++i) std::cout << "long ";
 		std::cout << "int\n";
+#endif
 	}
 	virtual void Delete()
 	{
@@ -182,12 +210,13 @@ private:
 --------------------*/
 int main()
 {
-	QHelper::SaveTest("./TestData/Q25314/", 2);
-
-	/*QHelper::Init();
+#if defined(DEBUG) || defined(_DEBUG) 
+	// QHelper::SaveTest("./TestData/Q25314/", 2);
+	QHelper::Init();
+#endif
 
 	std::unique_ptr<QBase> q = std::make_unique<Q25314>();
 
-	q->Solve();
-	return 0;*/
+	q->Solve(2);
+	return 0;
 }
