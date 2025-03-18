@@ -6,6 +6,9 @@
 #include <cstdlib>
 #include <stdint.h>
 
+#include <filesystem>
+
+#include <fstream>
 #include <queue>
 #include <stack>
 #include <string>
@@ -32,6 +35,69 @@ public:
 		std::ios_base::sync_with_stdio(false);
 		std::cin.tie(NULL);
 		std::cout.tie(NULL);
+	}
+
+	static inline void mkdir(const std::string& path)
+	{
+		std::filesystem::path p(path);
+
+		if (std::filesystem::is_directory(p))
+			return;
+
+		std::filesystem::create_directories(p);
+	}
+	static inline void SaveTestFile(const std::string& dir = "./TestData/Q1/", const std::string& filename = "Input1.txt")
+	{
+		mkdir(dir);
+		std::string line;
+		std::ofstream ofp(dir + filename);
+
+		assert(ofp.is_open());
+
+		while (std::getline(std::cin, line)) {
+			if (line == ";;") break;
+			ofp << line << std::endl;
+		}
+
+		ofp.close();
+	}
+
+	static inline void SaveTest(const std::string& dir = "./TestData/Q1/", const int& num = 1)
+	{
+		
+		for (int i = 1; i <= num; ++i)
+		{
+			std::string inputFileName = "Input" + std::to_string(i) + ".txt";
+			std::string outputFileName = "Output" + std::to_string(i) + ".txt";
+
+			std::cout << "*Info, Start Input file: " << dir + inputFileName << " (last line: ;;)\n";
+			SaveTestFile(dir, inputFileName);
+			std::cout << "*Info, Finish Input file: " << dir + inputFileName << "\n";
+
+			std::cout << "*Info, Start Onput file: " << dir + outputFileName << " (last line: ;;)\n";
+			SaveTestFile(dir, outputFileName);
+			std::cout << "*Info, Finish Onput file: " << dir + outputFileName << "\n";
+		}
+		
+	}
+
+	static inline std::ifstream LoadTestInput(const int idx = 1)
+	{
+		std::string line;
+		std::string fileName = "TestData/Input/Input" + std::to_string(idx) + ".txt";
+
+		std::ifstream fp(fileName);
+		
+		if (fp.is_open()) {
+			while (getline(fp, line)) {
+				std::cout << line << std::endl;
+			}
+		}
+		else {
+			std::cout << "Unable to open file: " << fileName << std::endl;
+		}
+
+		return fp;
 	}
 };
 
@@ -61,56 +127,54 @@ private:
 };
 
 /*--------------------
-* Q11382
+* Q25314
 --------------------*/
-class Q11382 : public QBase
+class Q25314 : public QBase
 {
 public:
-	Q11382()
+	Q25314()
 		: QBase()
-		, _A(0)
-		, _B(0)
-		, _C(0)
+		, _A(4)
 	{}
-	Q11382(const Q11382& rhs) 
+	Q25314(const Q25314& rhs)
 		: QBase(rhs) 
 		, _A(rhs._A)
-		, _B(rhs._B)
-		, _C(rhs._C)
 	{}
-	Q11382& operator=(const Q11382& rhs)
+	Q25314& operator=(const Q25314& rhs)
 	{
 		if (&rhs == this) return *this;
 		QBase::operator=(rhs);
 
 		_A = rhs._A;
-		_B = rhs._B;
-		_C = rhs._C;
 
 		return *this;
 	}
-	virtual ~Q11382() = default;
+	virtual ~Q25314() = default;
 
 private:
 	virtual void Input() 
 	{
-		std::cin >> _A >> _B >> _C;
-		assert(_A >= 1 && _A <= 1000000000000);
-		assert(_B >= 1 && _B <= 1000000000000);
-		assert(_C >= 1 && _C <= 1000000000000);
+#if defined(DEBUG) || defined(_DEBUG) 
+		std::ifstream fp = QHelper::LoadTestInput();
+		
+		fp >> _A;
+#else
+		std::cin >> _A;
+#endif
+		
+		assert(_A >= 4 && _A <= 1000);
 	}
 	virtual void Solution()
 	{
-		std::cout << _A + _B + _C << std::endl;
+		for (uint16_t i = 0; i < _A / 4; ++i) std::cout << "long ";
+		std::cout << "int\n";
 	}
 	virtual void Delete()
 	{
 	}
 
 private:
-	uint64_t _A;
-	uint64_t _B;
-	uint64_t _C;
+	uint16_t _A;
 };
 
 /*--------------------
@@ -118,10 +182,12 @@ private:
 --------------------*/
 int main()
 {
-	QHelper::Init();
+	QHelper::SaveTest("./TestData/Q25314/", 2);
 
-	std::unique_ptr<QBase> q = std::make_unique<Q11382>();
+	/*QHelper::Init();
+
+	std::unique_ptr<QBase> q = std::make_unique<Q25314>();
 
 	q->Solve();
-	return 0;
+	return 0;*/
 }

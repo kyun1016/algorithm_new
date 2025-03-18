@@ -64,6 +64,15 @@
     <Filter Include="Header Files\Input">
       <UniqueIdentifier>{24bae0f5-4115-47d7-9549-7ae1620c0ff5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Implement">
+      <UniqueIdentifier>{c7561654-b7e6-4079-abb2-e9c4d3709872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestData">
+      <UniqueIdentifier>{10e2b26f-6768-4262-84b0-d0bd8ca63148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestData\Q25314">
+      <UniqueIdentifier>{9a1033c6-0a55-4301-b0a1-93ec3490f107}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -155,5 +164,16 @@
     <ClInclude Include="Input_Q11382.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="imp_Q25314.h">
+      <Filter>Header Files\Implement</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TestData\Q25314\Output1.txt">
+      <Filter>TestData\Q25314</Filter>
+    </Text>
+    <Text Include="TestData\Q25314\Input1.txt">
+      <Filter>TestData\Q25314</Filter>
+    </Text>
   </ItemGroup>
 </Project>

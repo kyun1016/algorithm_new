@@ -76,6 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -90,6 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,6 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +150,7 @@
     <ClInclude Include="Greedy_Q1715.h" />
     <ClInclude Include="Greedy_Q1789.h" />
     <ClInclude Include="Greedy_Q18185.h" />
+    <ClInclude Include="imp_Q25314.h" />
     <ClInclude Include="Input_Q11382.h" />
     <ClInclude Include="Kruskal_BFS_Q17472.h" />
     <ClInclude Include="MinimumSpanningTree_Union_Q1922.h" />
@@ -158,6 +163,10 @@
     <ClInclude Include="BackTracking_DFS_Q15686.h" />
     <ClInclude Include="Trie_Q5670.h" />
     <ClInclude Include="BackTracking_DFS_Q6603.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TestData\Q25314\Input1.txt" />
+    <Text Include="TestData\Q25314\Output1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

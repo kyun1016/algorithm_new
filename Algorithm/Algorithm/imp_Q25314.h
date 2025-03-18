@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -61,56 +62,47 @@ private:
 };
 
 /*--------------------
-* Q11382
+* Q25314
 --------------------*/
-class Q11382 : public QBase
+class Q25314 : public QBase
 {
 public:
-	Q11382()
+	Q25314()
 		: QBase()
-		, _A(0)
-		, _B(0)
-		, _C(0)
+		, _A(4)
 	{}
-	Q11382(const Q11382& rhs)
+	Q25314(const Q25314& rhs)
 		: QBase(rhs)
 		, _A(rhs._A)
-		, _B(rhs._B)
-		, _C(rhs._C)
 	{}
-	Q11382& operator=(const Q11382& rhs)
+	Q25314& operator=(const Q25314& rhs)
 	{
 		if (&rhs == this) return *this;
 		QBase::operator=(rhs);
 
 		_A = rhs._A;
-		_B = rhs._B;
-		_C = rhs._C;
 
 		return *this;
 	}
-	virtual ~Q11382() = default;
+	virtual ~Q25314() = default;
 
 private:
 	virtual void Input()
 	{
-		std::cin >> _A >> _B >> _C;
-		assert(_A >= 1 && _A <= 1000000000000);
-		assert(_B >= 1 && _B <= 1000000000000);
-		assert(_C >= 1 && _C <= 1000000000000);
+		std::cin >> _A;
+		assert(_A >= 4 && _A <= 1000);
 	}
 	virtual void Solution()
 	{
-		std::cout << _A + _B + _C << std::endl;
+		for (uint16_t i = 0; i < _A / 4; ++i) std::cout << "long ";
+		std::cout << "int\n";
 	}
 	virtual void Delete()
 	{
 	}
 
 private:
-	uint64_t _A;
-	uint64_t _B;
-	uint64_t _C;
+	uint16_t _A;
 };
 
 /*--------------------
@@ -120,7 +112,7 @@ private:
 //{
 //	QHelper::Init();
 //
-//	std::unique_ptr<QBase> q = std::make_unique<Q11382>();
+//	std::unique_ptr<QBase> q = std::make_unique<Q25314>();
 //
 //	q->Solve();
 //	return 0;
