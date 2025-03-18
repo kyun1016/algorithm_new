@@ -150,6 +150,7 @@
     <ClInclude Include="Greedy_Q1715.h" />
     <ClInclude Include="Greedy_Q1789.h" />
     <ClInclude Include="Greedy_Q18185.h" />
+    <ClInclude Include="Imp_Q10810.h" />
     <ClInclude Include="imp_Q25314.h" />
     <ClInclude Include="Input_Q11382.h" />
     <ClInclude Include="Kruskal_BFS_Q17472.h" />
