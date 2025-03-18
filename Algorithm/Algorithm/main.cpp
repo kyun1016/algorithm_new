@@ -132,6 +132,7 @@ public:
 				line2.pop_back();
 
 			assert(line == line2);
+			std::cout << line << std::endl;
 			std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 		}
 	}
@@ -160,19 +161,19 @@ private:
 };
 
 /*--------------------
-* Q10813
+* Q10811
 --------------------*/
-class Q10813 : public QBase
+class Q10811 : public QBase
 {
 public:
-	Q10813() = default;
-	virtual ~Q10813() = default;
+	Q10811() = default;
+	virtual ~Q10811() = default;
 
 private:
 	virtual void Input(const int& testCase)
 	{
 #if defined(DEBUG) || defined(_DEBUG)
-		std::ifstream cin = QHelper::LoadTestInput("./TestData/Q10813/", testCase);
+		std::ifstream cin = QHelper::LoadTestInput("./TestData/Q10811/", testCase);
 #else
 		using namespace std;
 #endif
@@ -184,7 +185,7 @@ private:
 	virtual void Solution(const int& testCase)
 	{
 #if defined(DEBUG) || defined(_DEBUG)
-		std::ofstream cout = QHelper::PrintTestAnswer("./TestData/Q10813/", testCase);
+		std::ofstream cout = QHelper::PrintTestAnswer("./TestData/Q10811/", testCase);
 #else
 		using namespace std;
 #endif
@@ -194,9 +195,14 @@ private:
 
 		for (const auto& a : _arr)
 		{
-			int temp = ans[a[0] - 1];
-			ans[a[0] - 1] = ans[a[1] - 1];
-			ans[a[1] - 1] = temp;
+			uint16_t temp;
+			uint16_t cnt = ((a[1] - a[0]) + 1) / 2;
+			for (uint16_t i = 0; i < cnt; ++i)
+			{
+				temp = ans[a[0] - 1 + i];
+				ans[a[0] - 1 + i] = ans[a[1] - 1 - i];
+				ans[a[1] - 1 - i] = temp;
+			}
 		}
 
 		for (const auto& a : ans)
@@ -205,7 +211,7 @@ private:
 #if defined(DEBUG) || defined(_DEBUG)
 		cout << std::endl;
 		cout.close();
-		QHelper::Score("./TestData/Q10813/", testCase);
+		QHelper::Score("./TestData/Q10811/", testCase);
 #endif
 	}
 	virtual void Delete()
@@ -224,12 +230,10 @@ private:
 int main()
 {
 #if defined(DEBUG) || defined(_DEBUG) 
-	// QHelper::SaveTest("./TestData/Q10813/", 1);
-	QHelper::Init();
+	// QHelper::SaveTest("./TestData/Q10811/", 1);
 #endif
-
-	std::unique_ptr<QBase> q = std::make_unique<Q10813>();
-
+	QHelper::Init();
+	std::unique_ptr<QBase> q = std::make_unique<Q10811>();
 	q->Solve();
 	return 0;
 }
