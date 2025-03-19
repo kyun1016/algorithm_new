@@ -76,6 +76,12 @@
     <Filter Include="Helper">
       <UniqueIdentifier>{7aebf530-dc0d-49c3-9059-3d1240af11a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{75d19ae3-6166-4cfe-abe1-cf71f458179f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data Structure">
+      <UniqueIdentifier>{560f7a0c-83d5-4ece-9fe1-8558ba6155a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -186,7 +192,40 @@
       <Filter>Header Files\String</Filter>
     </ClInclude>
     <ClInclude Include="String_Q25206.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Imp_Q2745_진법변환.h">
+      <Filter>Header Files\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="Imp_Q11005_진접변환2.h">
+      <Filter>Header Files\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_Q2903_PLANINA(4분할).h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_Q2501_약수.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_Q9063(사각형).h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_Q9506_약수_완전수.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_24313_Big-O.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="UM_Q25192.h">
+      <Filter>Header Files\Data Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Set_Q25192.h">
+      <Filter>Header Files\Data Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Set_Q26069.h">
+      <Filter>Header Files\Data Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="UM_Q20920(사전 정렬).h">
+      <Filter>Header Files\Data Structure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

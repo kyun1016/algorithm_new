@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -119,7 +120,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -136,7 +137,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line.compare(line2) == 0);
-			if(line.compare(line2) == 0)
+			if (line.compare(line2) == 0)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Info, [" << i++ << " Line] Test Fail\n";
@@ -163,17 +164,17 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
-* Q20920
+* Q25192
 --------------------*/
-class Q20920 final : public QBase
+class Q25192 final : public QBase
 {
 public:
-	Q20920() = default;
-	virtual ~Q20920() = default;
+	Q25192() = default;
+	virtual ~Q25192() = default;
 
 private:
 	virtual void Input(const int& testCase) override
@@ -183,8 +184,9 @@ private:
 #else
 		using namespace std;
 #endif
-		cin >> _N >> _M;
+		cin >> _N;
 		_arr.resize(_N);
+		std::string temp;
 		for (auto& d : _arr)
 			cin >> d;
 	}
@@ -199,15 +201,21 @@ private:
 		* Solution
 		--------------------*/
 		{
-			std::unordered_map<std::string, uint32_t> um;
+			std::set<std::string> s;
+			int ret = 0;
 			for (const auto& d : _arr)
-				if(d.length() >= _M)
-					um[d]++;
+			{
+				if (d == "ENTER")
+				{
+					ret += s.size();
+					s.clear();
+					continue;
+				}
+				s.insert(d);
+			}
+			ret += s.size();
 
-			std::vector<std::pair<std::string, uint32_t>> v(um.begin(), um.end());
-			std::sort(v.begin(), v.end(), comp);
-			for (const auto& d : v)
-				cout << d.first << '\n';
+			cout << ret;
 		}
 
 #if defined(DEBUG) || defined(_DEBUG)
@@ -222,27 +230,9 @@ private:
 	}
 
 private:
-	std::string _dir = "./TestData/Q20920/";
+	std::string _dir = "./TestData/Q25192/";
 private:
-	static inline bool comp(const std::pair<std::string, uint32_t>& a, const std::pair<std::string, uint32_t>& b)
-	{
-		if (a.second != b.second)
-			return a.second > b.second;
-
-		if (a.first.length() != b.first.length())
-			return a.first.length() > b.first.length();
-
-		return a.first < b.first;
-	}
-
 	uint32_t _N;
-	uint32_t _M;
-	struct data
-	{
-		std::string a;
-		uint32_t cnt;
-	};
-
 	std::vector<std::string> _arr;
 };
 
@@ -253,13 +243,13 @@ int main()
 {
 	QHelper::Init();
 #if defined(DEBUG) || defined(_DEBUG)
-	int TestCase = 2;
-	// QHelper::SaveTest("./TestData/Q20920/", TestCase);
-	std::unique_ptr<QBase> q = std::make_unique<Q20920>();
-	for(int i=1; i<=TestCase;++i)
+	int TestCase = 3;
+	// QHelper::SaveTest("./TestData/Q25192/", TestCase);
+	std::unique_ptr<QBase> q = std::make_unique<Q25192>();
+	for (int i = 1; i <= TestCase; ++i)
 		q->Solve(i);
 #else
-	std::unique_ptr<QBase> q = std::make_unique<Q20920>();
+	std::unique_ptr<QBase> q = std::make_unique<Q25192>();
 	q->Solve();
 #endif
 	return 0;

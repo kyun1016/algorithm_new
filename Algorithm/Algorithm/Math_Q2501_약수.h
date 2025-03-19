@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -78,8 +79,8 @@ public:
 
 	static inline void SaveTest(const std::string& dir = "./TestData/Q1/", const int& num = 1)
 	{
-		std::string temp;
-		// std::cin >> temp;
+		int temp;
+		std::cin >> temp;
 
 		for (int i = 1; i <= num; ++i)
 		{
@@ -126,7 +127,7 @@ public:
 
 		std::string line;
 		std::string line2;
-		uint32_t i = 0;
+		uint16_t i = 0;
 		while (getline(ifp, line)) {
 			assert(getline(ifp2, line2));
 			if (line2.back() == ' ')
@@ -135,11 +136,8 @@ public:
 				line2.pop_back();
 
 			std::cout << line2 << std::endl;
-			// assert(line.compare(line2) == 0);
-			if(line.compare(line2) == 0)
-				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
-			else
-				std::cout << "*Info, [" << i++ << " Line] Test Fail\n";
+			assert(line == line2);
+			std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 		}
 	}
 };
@@ -167,28 +165,25 @@ private:
 };
 
 /*--------------------
-* Q20920
+* Q2501
 --------------------*/
-class Q20920 final : public QBase
+class Q2501 : public QBase
 {
 public:
-	Q20920() = default;
-	virtual ~Q20920() = default;
+	Q2501() = default;
+	virtual ~Q2501() = default;
 
 private:
-	virtual void Input(const int& testCase) override
+	virtual void Input(const int& testCase)
 	{
 #if defined(DEBUG) || defined(_DEBUG)
 		std::ifstream cin = QHelper::LoadTestInput(_dir, testCase);
 #else
 		using namespace std;
 #endif
-		cin >> _N >> _M;
-		_arr.resize(_N);
-		for (auto& d : _arr)
-			cin >> d;
+		cin >> _N >> _K;
 	}
-	virtual void Solution(const int& testCase) override
+	virtual void Solution(const int& testCase)
 	{
 #if defined(DEBUG) || defined(_DEBUG)
 		std::ofstream cout = QHelper::PrintTestAnswer(_dir, testCase);
@@ -198,52 +193,35 @@ private:
 		/*--------------------
 		* Solution
 		--------------------*/
+		
 		{
-			std::unordered_map<std::string, uint32_t> um;
-			for (const auto& d : _arr)
-				if(d.length() >= _M)
-					um[d]++;
+			std::vector<int> divisor;
+			for (uint16_t i = 1; i <= _N; ++i)
+				if (_N % i == 0)
+					divisor.push_back(i);
 
-			std::vector<std::pair<std::string, uint32_t>> v(um.begin(), um.end());
-			std::sort(v.begin(), v.end(), comp);
-			for (const auto& d : v)
-				cout << d.first << '\n';
+			if (_K <= divisor.size())
+				cout << divisor[_K - 1];
+			else
+				cout << '0';
 		}
 
 #if defined(DEBUG) || defined(_DEBUG)
-		cout << std::endl;
-		cout.close();
-		QHelper::Score(_dir, testCase);
+			cout << std::endl;
+			cout.close();
+			QHelper::Score(_dir, testCase);
 #endif
 	}
-	virtual void Delete() override
+	virtual void Delete()
 	{
 
 	}
 
 private:
-	std::string _dir = "./TestData/Q20920/";
+	std::string _dir = "./TestData/Q2501/";
 private:
-	static inline bool comp(const std::pair<std::string, uint32_t>& a, const std::pair<std::string, uint32_t>& b)
-	{
-		if (a.second != b.second)
-			return a.second > b.second;
-
-		if (a.first.length() != b.first.length())
-			return a.first.length() > b.first.length();
-
-		return a.first < b.first;
-	}
-
-	uint32_t _N;
-	uint32_t _M;
-	struct data
-	{
-		std::string a;
-		uint32_t cnt;
-	};
-
-	std::vector<std::string> _arr;
+	uint16_t _N;
+	uint16_t _K;
 };
 
 /*--------------------
@@ -253,13 +231,13 @@ int main()
 {
 	QHelper::Init();
 #if defined(DEBUG) || defined(_DEBUG)
-	int TestCase = 2;
-	// QHelper::SaveTest("./TestData/Q20920/", TestCase);
-	std::unique_ptr<QBase> q = std::make_unique<Q20920>();
+	int TestCase = 3;
+	// QHelper::SaveTest("./TestData/Q2501/", TestCase);
+	std::unique_ptr<QBase> q = std::make_unique<Q2501>();
 	for(int i=1; i<=TestCase;++i)
 		q->Solve(i);
 #else
-	std::unique_ptr<QBase> q = std::make_unique<Q20920>();
+	std::unique_ptr<QBase> q = std::make_unique<Q2501>();
 	q->Solve();
 #endif
 	return 0;
