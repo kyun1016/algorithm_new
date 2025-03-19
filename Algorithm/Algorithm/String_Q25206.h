@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -116,7 +117,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -157,17 +158,17 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
-* Q2745
+* Q25206
 --------------------*/
-class Q2745 : public QBase
+class Q25206 : public QBase
 {
 public:
-	Q2745() = default;
-	virtual ~Q2745() = default;
+	Q25206() = default;
+	virtual ~Q25206() = default;
 
 private:
 	virtual void Input(const int& testCase)
@@ -177,7 +178,35 @@ private:
 #else
 		using namespace std;
 #endif
-		cin >> _number >> _radix;
+		std::string temp;
+		float total;
+		for (uint16_t i = 0; i < 20; ++i)
+		{
+			cin >> temp >> total >> temp;
+			if (temp == "P")
+				continue;
+			_total.push_back(total);
+			if (temp == "A+")
+				total = 4.5;
+			else if (temp == "A0")
+				total = 4.0;
+			else if (temp == "B+")
+				total = 3.5;
+			else if (temp == "B0")
+				total = 3.0;
+			else if (temp == "C+")
+				total = 2.5;
+			else if (temp == "C0")
+				total = 2.0;
+			else if (temp == "D+")
+				total = 1.5;
+			else if (temp == "D0")
+				total = 1.0;
+			else if (temp == "F")
+				total = 0.0;
+
+			_score.push_back(total);
+		}
 	}
 	virtual void Solution(const int& testCase)
 	{
@@ -186,43 +215,34 @@ private:
 #else
 		using namespace std;
 #endif
-		/*--------------------
-		* Solution
-		--------------------*/
+		float allScore = 0.0;
+		float totalScore = 0.0;
+		for (size_t i = 0; i < _total.size(); ++i)
 		{
-			uint32_t ret = 0;
-			uint32_t radix = 1;
-			for (size_t i = 1; i <= _number.size(); ++i)
-			{
-				char a = _number[_number.size() - i];
-				int num = 0;
-				if (a >= 'A' && a <= 'Z')
-					num = a - 'A' + 10;
-				else
-					num = a - '0';
-
-				ret += num * radix;
-				radix *= _radix;
-			}
-			cout << ret;
+			allScore += _total[i];
+			totalScore += _total[i] * _score[i];
 		}
 
+		cout.setf(std::ios::fixed, std::ios::floatfield);
+		cout.precision(6);
+		cout << totalScore / allScore;
+		// cout << std::setprecision(6) << totalScore / allScore;
+
 #if defined(DEBUG) || defined(_DEBUG)
-			cout << std::endl;
-			cout.close();
-			QHelper::Score(_dir, testCase);
+		cout << std::endl;
+		cout.close();
+		QHelper::Score(_dir, testCase);
 #endif
 	}
 	virtual void Delete()
 	{
-
 	}
 
 private:
-	std::string _dir = "./TestData/Q2745/";
+	std::string _dir = "./TestData/Q25206/";
 private:
-	std::string _number;
-	uint32_t _radix;
+	std::vector<float> _total;
+	std::vector<float> _score;
 };
 
 /*--------------------
@@ -231,10 +251,10 @@ private:
 int main()
 {
 #if defined(DEBUG) || defined(_DEBUG) 
-	// QHelper::SaveTest("./TestData/Q2745/", 1);
+	// QHelper::SaveTest("./TestData/Q25206/", 2);
 #endif
 	QHelper::Init();
-	std::unique_ptr<QBase> q = std::make_unique<Q2745>();
+	std::unique_ptr<QBase> q = std::make_unique<Q25206>();
 	q->Solve(1);
 	return 0;
 }

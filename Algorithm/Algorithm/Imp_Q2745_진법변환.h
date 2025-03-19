@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -116,7 +117,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -157,7 +158,7 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
@@ -208,9 +209,9 @@ private:
 		}
 
 #if defined(DEBUG) || defined(_DEBUG)
-			cout << std::endl;
-			cout.close();
-			QHelper::Score(_dir, testCase);
+		cout << std::endl;
+		cout.close();
+		QHelper::Score(_dir, testCase);
 #endif
 	}
 	virtual void Delete()

@@ -176,6 +176,18 @@
     <ClInclude Include="Imp_Q10813.h">
       <Filter>Header Files\Implement</Filter>
     </ClInclude>
+    <ClInclude Include="Imp_Q2444.h">
+      <Filter>Header Files\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="String_Q27866.h">
+      <Filter>Header Files\String</Filter>
+    </ClInclude>
+    <ClInclude Include="String_Q9086.h">
+      <Filter>Header Files\String</Filter>
+    </ClInclude>
+    <ClInclude Include="String_Q25206.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestData\Q25314\Output1.txt">

@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -116,7 +117,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -157,17 +158,17 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
-* Q2745
+* Q27866
 --------------------*/
-class Q2745 : public QBase
+class Q27866 : public QBase
 {
 public:
-	Q2745() = default;
-	virtual ~Q2745() = default;
+	Q27866() = default;
+	virtual ~Q27866() = default;
 
 private:
 	virtual void Input(const int& testCase)
@@ -177,7 +178,8 @@ private:
 #else
 		using namespace std;
 #endif
-		cin >> _number >> _radix;
+		cin >> _S;
+		cin >> _N;
 	}
 	virtual void Solution(const int& testCase)
 	{
@@ -186,43 +188,23 @@ private:
 #else
 		using namespace std;
 #endif
-		/*--------------------
-		* Solution
-		--------------------*/
-		{
-			uint32_t ret = 0;
-			uint32_t radix = 1;
-			for (size_t i = 1; i <= _number.size(); ++i)
-			{
-				char a = _number[_number.size() - i];
-				int num = 0;
-				if (a >= 'A' && a <= 'Z')
-					num = a - 'A' + 10;
-				else
-					num = a - '0';
+		cout << _S[_N - 1] << std::endl;
 
-				ret += num * radix;
-				radix *= _radix;
-			}
-			cout << ret;
-		}
 
 #if defined(DEBUG) || defined(_DEBUG)
-			cout << std::endl;
-			cout.close();
-			QHelper::Score(_dir, testCase);
+		cout << std::endl;
+		cout.close();
+		QHelper::Score(_dir, testCase);
 #endif
 	}
 	virtual void Delete()
 	{
-
 	}
 
 private:
-	std::string _dir = "./TestData/Q2745/";
-private:
-	std::string _number;
-	uint32_t _radix;
+	std::string _dir = "./TestData/Q27866/";
+	std::string _S;
+	uint16_t _N;
 };
 
 /*--------------------
@@ -231,10 +213,10 @@ private:
 int main()
 {
 #if defined(DEBUG) || defined(_DEBUG) 
-	// QHelper::SaveTest("./TestData/Q2745/", 1);
+	// QHelper::SaveTest("./TestData/Q27866/", 3);
 #endif
 	QHelper::Init();
-	std::unique_ptr<QBase> q = std::make_unique<Q2745>();
-	q->Solve(1);
+	std::unique_ptr<QBase> q = std::make_unique<Q27866>();
+	q->Solve(3);
 	return 0;
 }

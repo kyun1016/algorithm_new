@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -116,7 +117,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -157,17 +158,17 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
-* Q2745
+* Q2444
 --------------------*/
-class Q2745 : public QBase
+class Q2444 : public QBase
 {
 public:
-	Q2745() = default;
-	virtual ~Q2745() = default;
+	Q2444() = default;
+	virtual ~Q2444() = default;
 
 private:
 	virtual void Input(const int& testCase)
@@ -177,7 +178,7 @@ private:
 #else
 		using namespace std;
 #endif
-		cin >> _number >> _radix;
+		cin >> _N;
 	}
 	virtual void Solution(const int& testCase)
 	{
@@ -186,43 +187,37 @@ private:
 #else
 		using namespace std;
 #endif
-		/*--------------------
-		* Solution
-		--------------------*/
+		for (uint16_t i = 0; i < _N; ++i)
 		{
-			uint32_t ret = 0;
-			uint32_t radix = 1;
-			for (size_t i = 1; i <= _number.size(); ++i)
-			{
-				char a = _number[_number.size() - i];
-				int num = 0;
-				if (a >= 'A' && a <= 'Z')
-					num = a - 'A' + 10;
-				else
-					num = a - '0';
-
-				ret += num * radix;
-				radix *= _radix;
-			}
-			cout << ret;
+			for (uint16_t j = 0; j < _N - i - 1; ++j)
+				cout << ' ';
+			for (uint16_t j = 0; j < 1 + i * 2; ++j)
+				cout << '*';
+			cout << '\n';
+		}
+		for (uint16_t i = 1; i < _N; ++i)
+		{
+			for (uint16_t j = 0; j < i; ++j)
+				cout << ' ';
+			for (uint16_t j = 0; j < (_N - 1 - i) * 2 + 1; ++j)
+				cout << '*';
+			cout << '\n';
 		}
 
+
 #if defined(DEBUG) || defined(_DEBUG)
-			cout << std::endl;
-			cout.close();
-			QHelper::Score(_dir, testCase);
+		cout << std::endl;
+		cout.close();
+		QHelper::Score(_dir, testCase);
 #endif
 	}
 	virtual void Delete()
 	{
-
 	}
 
 private:
-	std::string _dir = "./TestData/Q2745/";
-private:
-	std::string _number;
-	uint32_t _radix;
+	std::string _dir = "./TestData/Q2444/";
+	uint16_t _N;
 };
 
 /*--------------------
@@ -231,10 +226,10 @@ private:
 int main()
 {
 #if defined(DEBUG) || defined(_DEBUG) 
-	// QHelper::SaveTest("./TestData/Q2745/", 1);
+	// QHelper::SaveTest("./TestData/Q2444/", 1);
 #endif
 	QHelper::Init();
-	std::unique_ptr<QBase> q = std::make_unique<Q2745>();
-	q->Solve(1);
+	std::unique_ptr<QBase> q = std::make_unique<Q2444>();
+	q->Solve();
 	return 0;
 }
