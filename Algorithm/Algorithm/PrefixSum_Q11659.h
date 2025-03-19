@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -119,7 +120,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -136,7 +137,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line.compare(line2) == 0);
-			if(line.compare(line2) == 0)
+			if (line.compare(line2) == 0)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Info, [" << i++ << " Line] Test Fail\n";
@@ -163,7 +164,7 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
@@ -207,8 +208,8 @@ private:
 			sumArr[0] = _numArr[0];
 			for (uint32_t i = 1; i < _N; ++i)
 				sumArr[i] = sumArr[i - 1] + _numArr[i];
-			for(const auto& d: _stepArr)
-				if(d.s != 1)
+			for (const auto& d : _stepArr)
+				if (d.s != 1)
 					cout << sumArr[d.e - 1] - sumArr[d.s - 2] << '\n';
 				else
 					cout << sumArr[d.e - 1] << '\n';
@@ -251,8 +252,8 @@ int main()
 	int TestCase = 1;
 	// QHelper::SaveTest("./TestData/Q11659/", TestCase);
 	std::unique_ptr<QBase> q = std::make_unique<Q11659>();
-	for(int i=1; i<=TestCase;++i)
-	 	q->Solve(i);
+	for (int i = 1; i <= TestCase; ++i)
+		q->Solve(i);
 #else
 	std::unique_ptr<QBase> q = std::make_unique<Q11659>();
 	q->Solve();

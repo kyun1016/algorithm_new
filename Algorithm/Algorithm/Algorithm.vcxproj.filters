@@ -82,6 +82,9 @@
     <Filter Include="Header Files\Sort">
       <UniqueIdentifier>{fce6cdf7-569c-40c9-9af3-0adaf8ab68d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\누적 합">
+      <UniqueIdentifier>{09667e1d-3b9d-4fe0-92a7-dfcd76632d7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="UM_Q25192.h">
       <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Merge_Q24060_MergeSort구현.h">
+      <Filter>Header Files\Sort</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
