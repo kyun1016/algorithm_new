@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -119,7 +120,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -136,7 +137,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line.compare(line2) == 0);
-			if(line.compare(line2) == 0)
+			if (line.compare(line2) == 0)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Info, [" << i++ << " Line] Test Fail\n";
@@ -163,7 +164,7 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
@@ -204,12 +205,12 @@ private:
 			_sumArr.resize(_S.length() + 2);
 
 			for (int i = 1; i <= _S.length(); ++i)
-				_sumArr[i + 1] = _sumArr[i] + _S[i-1];
+				_sumArr[i + 1] = _sumArr[i] + _S[i - 1];
 
-			for(const auto& d: _arr)
+			for (const auto& d : _arr)
 			{
 				uint32_t ret = 0;
-				if      (d.alpha == 'a') ret = _sumArr[d.e + 1].a - _sumArr[d.s].a;
+				if (d.alpha == 'a') ret = _sumArr[d.e + 1].a - _sumArr[d.s].a;
 				else if (d.alpha == 'b') ret = _sumArr[d.e + 1].b - _sumArr[d.s].b;
 				else if (d.alpha == 'c') ret = _sumArr[d.e + 1].c - _sumArr[d.s].c;
 				else if (d.alpha == 'd') ret = _sumArr[d.e + 1].d - _sumArr[d.s].d;
@@ -295,7 +296,7 @@ private:
 
 		alphaCount operator+(const char& rhs)
 		{
-			if      (rhs == 'a') a++;
+			if (rhs == 'a') a++;
 			else if (rhs == 'b') b++;
 			else if (rhs == 'c') c++;
 			else if (rhs == 'd') d++;
@@ -321,7 +322,7 @@ private:
 			else if (rhs == 'x') x++;
 			else if (rhs == 'y') y++;
 			else if (rhs == 'z') z++;
-			
+
 			return *this;
 		}
 	};
@@ -372,8 +373,8 @@ int main()
 	int TestCase = 1;
 	// QHelper::SaveTest("./TestData/Q16139/", TestCase);
 	std::unique_ptr<QBase> q = std::make_unique<Q16139>();
-	for(int i=1; i<=TestCase;++i)
-	 	q->Solve(i);
+	for (int i = 1; i <= TestCase; ++i)
+		q->Solve(i);
 #else
 	std::unique_ptr<QBase> q = std::make_unique<Q16139>();
 	q->Solve();

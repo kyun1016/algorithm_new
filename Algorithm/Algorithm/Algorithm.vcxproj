@@ -165,6 +165,8 @@
     <ClInclude Include="Math_Q9506_약수_완전수.h" />
     <ClInclude Include="Merge_Q24060_MergeSort구현.h" />
     <ClInclude Include="MinimumSpanningTree_Union_Q1922.h" />
+    <ClInclude Include="PrefixSum_Q11659.h" />
+    <ClInclude Include="PrefixSum_Q2559(날씨 구간 중 최대 찾기).h" />
     <ClInclude Include="Set_Q25192.h" />
     <ClInclude Include="Set_Q26069.h" />
     <ClInclude Include="String_Q12904.h" />
