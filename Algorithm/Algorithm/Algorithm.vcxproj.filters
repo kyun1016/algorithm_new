@@ -79,8 +79,8 @@
     <Filter Include="Header Files\Math">
       <UniqueIdentifier>{75d19ae3-6166-4cfe-abe1-cf71f458179f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Data Structure">
-      <UniqueIdentifier>{560f7a0c-83d5-4ece-9fe1-8558ba6155a6}</UniqueIdentifier>
+    <Filter Include="Header Files\Sort">
+      <UniqueIdentifier>{fce6cdf7-569c-40c9-9af3-0adaf8ab68d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -215,17 +215,17 @@
     <ClInclude Include="Math_24313_Big-O.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="UM_Q25192.h">
-      <Filter>Header Files\Data Structure</Filter>
-    </ClInclude>
     <ClInclude Include="Set_Q25192.h">
-      <Filter>Header Files\Data Structure</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="Set_Q26069.h">
-      <Filter>Header Files\Data Structure</Filter>
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="UM_Q20920(사전 정렬).h">
-      <Filter>Header Files\Data Structure</Filter>
+      <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="UM_Q25192.h">
+      <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
