@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -119,7 +120,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -136,7 +137,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line.compare(line2) == 0);
-			if(line.compare(line2) == 0)
+			if (line.compare(line2) == 0)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Info, [" << i++ << " Line] Test Fail\n";
@@ -163,7 +164,7 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
@@ -220,7 +221,7 @@ private:
 					if ((y + x) % 2 == 0 && !_board[y][x] || (y + x) % 2 == 1 && _board[y][x])
 						wbw[y + 1][x + 1]++;
 				}
-					
+
 			// 1.2. BWBW ±¸°£ ÇÕ [l,r]
 			for (uint16_t y = 0; y < _N; ++y)
 				for (uint16_t x = 0; x < _M; ++x)
@@ -229,7 +230,7 @@ private:
 					if ((y + x) % 2 == 0 && _board[y][x] || (y + x) % 2 == 1 && !_board[y][x])
 						bwb[y + 1][x + 1]++;
 				}
-			
+
 			uint32_t ret = 4000000;
 			for (uint16_t y = _K; y <= _N; ++y)
 				for (uint16_t x = _K; x <= _M; ++x)
@@ -277,8 +278,8 @@ int main()
 	int TestCase = 4;
 	// QHelper::SaveTest("./TestData/Q25682/", TestCase);
 	std::unique_ptr<QBase> q = std::make_unique<Q25682>();
-	for(int i=1; i<=TestCase;++i)
-	  	q->Solve(i);
+	for (int i = 1; i <= TestCase; ++i)
+		q->Solve(i);
 #else
 	std::unique_ptr<QBase> q = std::make_unique<Q25682>();
 	q->Solve();

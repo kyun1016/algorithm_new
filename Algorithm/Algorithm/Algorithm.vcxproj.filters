@@ -85,6 +85,9 @@
     <Filter Include="Header Files\PrefixSum">
       <UniqueIdentifier>{09667e1d-3b9d-4fe0-92a7-dfcd76632d7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Recursion">
+      <UniqueIdentifier>{d70e2994-559b-49cb-9a92-cdea390d99b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -241,6 +244,12 @@
     </ClInclude>
     <ClInclude Include="PrefixSum_Q16139(알파벳 덧셈).h">
       <Filter>Header Files\PrefixSum</Filter>
+    </ClInclude>
+    <ClInclude Include="PrefixSum_Q10986%28나머지합%29.h">
+      <Filter>Header Files\PrefixSum</Filter>
+    </ClInclude>
+    <ClInclude Include="Recursion_Q4779.h">
+      <Filter>Header Files\Recursion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -119,7 +120,7 @@ public:
 		return LoadWOFile(dir, filename);
 	}
 
-	static inline void Score(const std::string & dir = "./TestData/Q1/", const int& testCase = 1)
+	static inline void Score(const std::string& dir = "./TestData/Q1/", const int& testCase = 1)
 	{
 		std::ifstream ifp = LoadTestOutput(dir, testCase);
 		std::ifstream ifp2 = LoadTestAnswer(dir, testCase);
@@ -136,7 +137,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line.compare(line2) == 0);
-			if(line.compare(line2) == 0)
+			if (line.compare(line2) == 0)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Info, [" << i++ << " Line] Test Fail\n";
@@ -163,17 +164,17 @@ private:
 	virtual void Input(const int& testCase) = 0;
 	virtual void Solution(const int& testCase) = 0;
 	virtual void Delete() = 0;
-	
+
 };
 
 /*--------------------
-* Q25682
+* Q10986
 --------------------*/
-class Q25682 final : public QBase
+class Q10986 final : public QBase
 {
 public:
-	Q25682() = default;
-	virtual ~Q25682() = default;
+	Q10986() = default;
+	virtual ~Q10986() = default;
 
 private:
 	virtual void Input(const int& testCase) override
@@ -183,18 +184,10 @@ private:
 #else
 		using namespace std;
 #endif
-		cin >> _N >> _M >> _K;
-		_board.resize(_N, std::vector<bool>(_M));
-		char c;
-		for (uint16_t y = 0; y < _N; ++y)
-			for (uint16_t x = 0; x < _M; ++x)
-			{
-				cin >> c;
-				if (c == 'B')
-					_board[y][x] = false;
-				else
-					_board[y][x] = true;
-			}
+		cin >> _N >> _M;
+		_arr.resize(_N);
+		for (uint32_t i = 0; i < _N; ++i)
+			cin >> _arr[i];
 	}
 	virtual void Solution(const int& testCase) override
 	{
@@ -207,41 +200,24 @@ private:
 		* Solution
 		--------------------*/
 		{
-			std::vector<std::vector<uint32_t>> wbw;
-			std::vector<std::vector<uint32_t>> bwb;
-			wbw.resize(_N + 1, std::vector<uint32_t>(_M + 1));
-			bwb.resize(_N + 1, std::vector<uint32_t>(_M + 1));
+			// 1. 나머지 합 행렬을 구한다.
+			std::vector<uint64_t> sum;
+			sum.resize(_M);
+			_sumArr.resize(_N + 1);
+			for (uint32_t i = 0; i < _N; ++i)
+			{
+				_sumArr[i + 1] = (_sumArr[i] + _arr[i]) % _M;
+				// 2. l, r이 같은 개수를 구한다.
+				++sum[_sumArr[i + 1]];
+			}
+			uint64_t ret = 0;
+			// 3.1. 0인 행렬은 더하기
+			ret += sum[0];
+			// 3.2. 나머지 배열들은 nC2로 구하기 (n*(n-1)/2)
+			for (const auto& d : sum)
+				if (d > 1)
+					ret += d * (d - 1) / 2;
 
-			// 1.1. WBWB 구간 합 [l,r]
-			for (uint16_t y = 0; y < _N; ++y)
-				for (uint16_t x = 0; x < _M; ++x)
-				{
-					wbw[y + 1][x + 1] = wbw[y + 1][x] + wbw[y][x + 1] - wbw[y][x];
-					if ((y + x) % 2 == 0 && !_board[y][x] || (y + x) % 2 == 1 && _board[y][x])
-						wbw[y + 1][x + 1]++;
-				}
-					
-			// 1.2. BWBW 구간 합 [l,r]
-			for (uint16_t y = 0; y < _N; ++y)
-				for (uint16_t x = 0; x < _M; ++x)
-				{
-					bwb[y + 1][x + 1] = bwb[y + 1][x] + bwb[y][x + 1] - bwb[y][x];
-					if ((y + x) % 2 == 0 && _board[y][x] || (y + x) % 2 == 1 && !_board[y][x])
-						bwb[y + 1][x + 1]++;
-				}
-			
-			uint32_t ret = 4000000;
-			for (uint16_t y = _K; y <= _N; ++y)
-				for (uint16_t x = _K; x <= _M; ++x)
-				{
-					// 2.1. WBW[0][l,r] / BWB / WBW ... 중 최소값
-					uint32_t sum = wbw[y][x] - wbw[y][x - _K] - wbw[y - _K][x] + wbw[y - _K][x - _K];
-					ret = ret < sum ? ret : sum;
-
-					sum = bwb[y][x] - bwb[y][x - _K] - bwb[y - _K][x] + bwb[y - _K][x - _K];
-					// 2.2. BWB[0][l,r] / WBW / BWB ... 중 최소값
-					ret = ret < sum ? ret : sum;
-				}
 			cout << ret;
 		}
 
@@ -253,18 +229,17 @@ private:
 	}
 	virtual void Delete() override
 	{
-		for (auto& d : _board)
-			d.clear();
-		_board.clear();
+
 	}
 
 private:
-	std::string _dir = "./TestData/Q25682/";
+	std::string _dir = "./TestData/Q10986/";
 private:
-	uint16_t _N;
-	uint16_t _M;
-	uint16_t _K;
-	std::vector<std::vector<bool>> _board;
+
+	uint64_t _N;
+	uint64_t _M;
+	std::vector<uint64_t> _arr;
+	std::vector<uint64_t> _sumArr;
 };
 
 /*--------------------
@@ -274,13 +249,13 @@ int main()
 {
 	QHelper::Init();
 #if defined(DEBUG) || defined(_DEBUG)
-	int TestCase = 4;
-	// QHelper::SaveTest("./TestData/Q25682/", TestCase);
-	std::unique_ptr<QBase> q = std::make_unique<Q25682>();
-	for(int i=1; i<=TestCase;++i)
-	  	q->Solve(i);
+	int TestCase = 1;
+	// QHelper::SaveTest("./TestData/Q10986/", TestCase);
+	std::unique_ptr<QBase> q = std::make_unique<Q10986>();
+	for (int i = 1; i <= TestCase; ++i)
+		q->Solve(i);
 #else
-	std::unique_ptr<QBase> q = std::make_unique<Q25682>();
+	std::unique_ptr<QBase> q = std::make_unique<Q10986>();
 	q->Solve();
 #endif
 	return 0;
