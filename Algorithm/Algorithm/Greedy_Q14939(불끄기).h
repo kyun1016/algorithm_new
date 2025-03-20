@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -167,13 +168,13 @@ private:
 };
 
 /*--------------------
-* Q2873
+* Q14939
 --------------------*/
-class Q2873 final : public QBase
+class Q14939 final : public QBase
 {
 public:
-	Q2873() = default;
-	virtual ~Q2873() = default;
+	Q14939() = default;
+	virtual ~Q14939() = default;
 
 private:
 	virtual void Input(const int& testCase) override
@@ -183,11 +184,15 @@ private:
 #else
 		using namespace std;
 #endif
-		cin >> _R >> _C;
-		_arr.resize(_R, std::vector<int16_t>(_C));
-		for (auto& r : _arr)
-			for (auto& c : r)
-				cin >> c;
+		_arr.resize(10);
+		std::string line;
+		for (uint16_t y = 0; y < 10; ++y)
+		{
+			cin >> line;
+			for (uint16_t x = 0; x < 10; ++x)
+				if (line[x] == 'O')
+					bitsum(y, x);
+		}
 	}
 	virtual void Solution(const int& testCase) override
 	{
@@ -200,87 +205,47 @@ private:
 		* Solution
 		--------------------*/
 		{
-			
-			if (_R % 2)
+			int ret = 1000000007;
+			int cnt = 0;
+			std::vector<uint16_t> map(_arr);
+			for (uint16_t k = 0; k < (1 << 10); ++k)
 			{
-				for (int16_t r = 0; r < _R; ++r)
+				// 1. Initial
 				{
-					char d = r % 2 ? 'L' : 'R';
-					for (int16_t c = 1; c < _C; ++c)
-						cout << d;
-					if (r == _R - 1)
-						break;
-					cout << 'D';
+					for (uint16_t y = 0; y < 10; ++y)
+						_arr[y] = map[y];
+					cnt = 0;
 				}
-			}
-			else if (_C % 2)
-			{
-				for (int16_t c = 0; c < _C; ++c)
+				// 2. Pre Setting
+				for (int x = 0; x < 10; ++x)
 				{
-					char d = c % 2 ? 'U' : 'D';
-					for (int16_t r = 1; r < _R; ++r)
-						cout << d;
-					if (c == _C - 1)
-						break;
-					cout << 'R';
-				}
-			}
-			else
-			{
-				pos target = findMin();
-				// 전반부
-				for (int16_t c = 0; c <= (target.x - 1 - target.x % 2); ++c)
-				{
-					char d = c % 2 ? 'U' : 'D';
-					for (int16_t r = 1; r < _R; ++r)
-						cout << d;
-					cout << 'R';
+					if (k & (1 << x))
+					{
+						++cnt;
+						pushBtn(0, x);
+					}
 				}
 
-				// 중간
+				// 3. Btn Chk
+				for (uint16_t y = 1; y < 10; ++y)
 				{
-					// 위쪽
-					int16_t r = 0;
-					for (; r <= (target.y - 1 - target.y % 2); ++r)
-						cout << (r % 2 ? "LD" : "RD");
-					// 타겟
-					for (int i=0; i < 2; ++r, i++)
+					for (uint16_t x = 0; x < 10; ++x)
 					{
-						if (target.y % 2 == r % 2)
+						if (bitchk(y - 1, x))
 						{
-							if(r != _R - 1)
-								cout << 'D';
-							continue;
+							pushBtn(y, x);
+							++cnt;
 						}
-						cout << 'R';
-						if (r != _R - 1)
-							cout << 'D';
-						else if ((target.x + 2 - target.x % 2) != _C)
-							cout << 'R';
 					}
-					// 아래쪽
-					for (; r < _R; ++r)
-					{
-						cout << (r % 2 ? 'R' : 'L');
-						if (r != _R - 1)
-							cout << 'D';
-						else if((target.x + 2 - target.x % 2) != _C)
-							cout << 'R';
-					}
-						
 				}
-
-				// 후반부
-				for (int16_t c = (target.x + 2 - target.x % 2); c < _C; ++c)
-				{
-					char d = c % 2 ? 'D' : 'U';
-					for (int16_t r = 1; r < _R; ++r)
-						cout << d;
-					if (c == _C - 1)
-						break;
-					cout << 'R';
-				}
+				if (!_arr[9])
+					ret = ret < cnt ? ret : cnt;
 			}
+
+			if (ret == 1000000007)
+				cout << -1;
+			else
+				cout << ret;
 		}
 
 #if defined(DEBUG) || defined(_DEBUG)
@@ -291,38 +256,45 @@ private:
 	}
 	virtual void Delete() override
 	{
-		_arr.clear();
 	}
 private:
-	std::string _dir = "./TestData/Q2873/";
+	std::string _dir = "./TestData/Q14939/";
 private:
-	int16_t _R;
-	int16_t _C;
-	std::vector<std::vector<int16_t>> _arr;
+	std::vector<uint16_t> _arr;
 
-	struct pos
+	inline void bitsum(const int& y, const int& x)
 	{
-		int16_t x;
-		int16_t y;
-	};
+		if (y < 0 || y > 9)
+			return;
+		if (x < 0 || x > 9)
+			return;
 
-	inline pos findMin()
-	{
-		int16_t val = INF;
-		pos ret = { 0,1 };
-		for (int16_t r = 0; r < _R; ++r)
-			for (int16_t c = 0; c < _C; ++c)
-				if ((r + c) % 2)
-					if (val > _arr[r][c])
-					{
-						val = _arr[r][c];
-						ret.x = c;
-						ret.y = r;
-					}
-
-		return ret;
+		_arr[y] ^= (1 << x);
 	}
-	static constexpr int16_t INF = 1001;
+
+	inline bool bitchk(const int& y, const int& x)
+	{
+		if (y < 0 || y > 9)
+			return false;
+		if (x < 0 || x > 9)
+			return false;
+
+		return _arr[y] & (1 << x);
+	}
+
+	inline void pushBtn(const int& y, const int& x)
+	{
+		if (y < 0 || y > 9)
+			return;
+		if (x < 0 || x > 9)
+			return;
+
+		bitsum(y - 1, x);
+		bitsum(y, x - 1);
+		bitsum(y, x);
+		bitsum(y, x + 1);
+		bitsum(y + 1, x);
+	}
 };
 
 /*--------------------
@@ -332,13 +304,13 @@ int main()
 {
 	QHelper::Init();
 #if defined(DEBUG) || defined(_DEBUG)
-	int TestCase = 3;
-	//QHelper::SaveTest("./TestData/Q2873/", TestCase);
-	std::unique_ptr<QBase> q = std::make_unique<Q2873>();
+	int TestCase = 1;
+	// QHelper::SaveTest("./TestData/Q14939/", TestCase);
+	std::unique_ptr<QBase> q = std::make_unique<Q14939>();
 	for (int i = 1; i <= TestCase; ++i)
 		q->Solve(i);
 #else
-	std::unique_ptr<QBase> q = std::make_unique<Q2873>();
+	std::unique_ptr<QBase> q = std::make_unique<Q14939>();
 	q->Solve();
 #endif
 	return 0;

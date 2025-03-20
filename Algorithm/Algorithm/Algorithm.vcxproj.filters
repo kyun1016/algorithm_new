@@ -251,6 +251,21 @@
     <ClInclude Include="Recursion_Q4779.h">
       <Filter>Header Files\Recursion</Filter>
     </ClInclude>
+    <ClInclude Include="PrefixSum_Q25682%28체스판%29.h">
+      <Filter>Header Files\PrefixSum</Filter>
+    </ClInclude>
+    <ClInclude Include="Greedy_Q1339(단어 더하기).h">
+      <Filter>Header Files\Greedy</Filter>
+    </ClInclude>
+    <ClInclude Include="Greedy_Q2437(저울).h">
+      <Filter>Header Files\Greedy</Filter>
+    </ClInclude>
+    <ClInclude Include="Greedy_Q1700(스케쥴링).h">
+      <Filter>Header Files\Greedy</Filter>
+    </ClInclude>
+    <ClInclude Include="Greedy_Q14939(불끄기).h">
+      <Filter>Header Files\Greedy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestData\Q25314\Output1.txt">

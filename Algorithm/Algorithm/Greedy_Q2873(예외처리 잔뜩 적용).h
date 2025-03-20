@@ -1,3 +1,4 @@
+#pragma once
 #define OUT
 
 #include <cstdio>
@@ -200,7 +201,7 @@ private:
 		* Solution
 		--------------------*/
 		{
-			
+
 			if (_R % 2)
 			{
 				for (int16_t r = 0; r < _R; ++r)
@@ -244,11 +245,11 @@ private:
 					for (; r <= (target.y - 1 - target.y % 2); ++r)
 						cout << (r % 2 ? "LD" : "RD");
 					// Å¸°Ù
-					for (int i=0; i < 2; ++r, i++)
+					for (int i = 0; i < 2; ++r, i++)
 					{
 						if (target.y % 2 == r % 2)
 						{
-							if(r != _R - 1)
+							if (r != _R - 1)
 								cout << 'D';
 							continue;
 						}
@@ -264,10 +265,10 @@ private:
 						cout << (r % 2 ? 'R' : 'L');
 						if (r != _R - 1)
 							cout << 'D';
-						else if((target.x + 2 - target.x % 2) != _C)
+						else if ((target.x + 2 - target.x % 2) != _C)
 							cout << 'R';
 					}
-						
+
 				}
 
 				// ÈÄ¹ÝºÎ
