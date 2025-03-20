@@ -167,13 +167,13 @@ private:
 };
 
 /*--------------------
-* Q2873
+* Q1799
 --------------------*/
-class Q2873 final : public QBase
+class Q1799 final : public QBase
 {
 public:
-	Q2873() = default;
-	virtual ~Q2873() = default;
+	Q1799() = default;
+	virtual ~Q1799() = default;
 
 private:
 	virtual void Input(const int& testCase) override
@@ -183,9 +183,9 @@ private:
 #else
 		using namespace std;
 #endif
-		cin >> _R >> _C;
-		_arr.resize(_R, std::vector<int16_t>(_C));
-		for (auto& r : _arr)
+		cin >> _N;
+		_board.resize(_N, std::vector<int16_t>(_N));
+		for (auto& r : _board)
 			for (auto& c : r)
 				cin >> c;
 	}
@@ -200,87 +200,14 @@ private:
 		* Solution
 		--------------------*/
 		{
-			
-			if (_R % 2)
-			{
-				for (int16_t r = 0; r < _R; ++r)
-				{
-					char d = r % 2 ? 'L' : 'R';
-					for (int16_t c = 1; c < _C; ++c)
-						cout << d;
-					if (r == _R - 1)
-						break;
-					cout << 'D';
-				}
-			}
-			else if (_C % 2)
-			{
-				for (int16_t c = 0; c < _C; ++c)
-				{
-					char d = c % 2 ? 'U' : 'D';
-					for (int16_t r = 1; r < _R; ++r)
-						cout << d;
-					if (c == _C - 1)
-						break;
-					cout << 'R';
-				}
-			}
-			else
-			{
-				pos target = findMin();
-				// 전반부
-				for (int16_t c = 0; c <= (target.x - 1 - target.x % 2); ++c)
-				{
-					char d = c % 2 ? 'U' : 'D';
-					for (int16_t r = 1; r < _R; ++r)
-						cout << d;
-					cout << 'R';
-				}
+			_ans[0] = 0;
+			_ans[1] = 0;
+			_l.resize(_N * 2);
+			_r.resize(_N * 2);
 
-				// 중간
-				{
-					// 위쪽
-					int16_t r = 0;
-					for (; r <= (target.y - 1 - target.y % 2); ++r)
-						cout << (r % 2 ? "LD" : "RD");
-					// 타겟
-					for (int i=0; i < 2; ++r, i++)
-					{
-						if (target.y % 2 == r % 2)
-						{
-							if(r != _R - 1)
-								cout << 'D';
-							continue;
-						}
-						cout << 'R';
-						if (r != _R - 1)
-							cout << 'D';
-						else if ((target.x + 2 - target.x % 2) != _C)
-							cout << 'R';
-					}
-					// 아래쪽
-					for (; r < _R; ++r)
-					{
-						cout << (r % 2 ? 'R' : 'L');
-						if (r != _R - 1)
-							cout << 'D';
-						else if((target.x + 2 - target.x % 2) != _C)
-							cout << 'R';
-					}
-						
-				}
-
-				// 후반부
-				for (int16_t c = (target.x + 2 - target.x % 2); c < _C; ++c)
-				{
-					char d = c % 2 ? 'D' : 'U';
-					for (int16_t r = 1; r < _R; ++r)
-						cout << d;
-					if (c == _C - 1)
-						break;
-					cout << 'R';
-				}
-			}
+			dfs(0, 0, 0);
+			dfs(0, 1, 0);
+			cout << _ans[0] + _ans[1];
 		}
 
 #if defined(DEBUG) || defined(_DEBUG)
@@ -291,38 +218,40 @@ private:
 	}
 	virtual void Delete() override
 	{
-		_arr.clear();
+		_board.clear();
 	}
 private:
-	std::string _dir = "./TestData/Q2873/";
+	std::string _dir = "./TestData/Q1799/";
 private:
-	int16_t _R;
-	int16_t _C;
-	std::vector<std::vector<int16_t>> _arr;
-
-	struct pos
+	int16_t _N;
+	std::vector<std::vector<int16_t>> _board;
+	int16_t _ans[2];
+	std::vector<bool> _l;
+	std::vector<bool> _r;
+	void dfs(int16_t row, int16_t col, const int16_t& cnt)
 	{
-		int16_t x;
-		int16_t y;
-	};
+		if (col >= _N)
+		{
+			++row;
+			if (col % 2)
+				col = 0;
+			else
+				col = 1;
+		}
+		if (row >= _N)
+		{
+			_ans[col] = _ans[col] >= cnt ? _ans[col] : cnt;
+			return;
+		}
 
-	inline pos findMin()
-	{
-		int16_t val = INF;
-		pos ret = { 0,1 };
-		for (int16_t r = 0; r < _R; ++r)
-			for (int16_t c = 0; c < _C; ++c)
-				if ((r + c) % 2)
-					if (val > _arr[r][c])
-					{
-						val = _arr[r][c];
-						ret.x = c;
-						ret.y = r;
-					}
-
-		return ret;
+		if (_board[row][col] && !_l[row - col + _N - 1] && !_r[row + col])
+		{
+			_l[row - col + _N - 1] = _r[row + col] = true;
+			dfs(row, col + 2, cnt + 1);
+			_l[row - col + _N - 1] = _r[row + col] = false;
+		}
+		dfs(row, col + 2, cnt);
 	}
-	static constexpr int16_t INF = 1001;
 };
 
 /*--------------------
@@ -332,13 +261,13 @@ int main()
 {
 	QHelper::Init();
 #if defined(DEBUG) || defined(_DEBUG)
-	int TestCase = 3;
-	//QHelper::SaveTest("./TestData/Q2873/", TestCase);
-	std::unique_ptr<QBase> q = std::make_unique<Q2873>();
+	int TestCase = 1;
+	// QHelper::SaveTest("./TestData/Q1799/", TestCase);
+	std::unique_ptr<QBase> q = std::make_unique<Q1799>();
 	for (int i = 1; i <= TestCase; ++i)
 		q->Solve(i);
 #else
-	std::unique_ptr<QBase> q = std::make_unique<Q2873>();
+	std::unique_ptr<QBase> q = std::make_unique<Q1799>();
 	q->Solve();
 #endif
 	return 0;

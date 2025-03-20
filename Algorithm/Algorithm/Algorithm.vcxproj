@@ -138,6 +138,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackTracking_DFS_Q1799(Queen).h" />
     <ClInclude Include="BFS_Q2468.h" />
     <ClInclude Include="BFS_Q4963.h" />
     <ClInclude Include="BinarySearch_Q2143.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Greedy_Q1789.h" />
     <ClInclude Include="Greedy_Q18185.h" />
     <ClInclude Include="Greedy_Q2437(저울).h" />
+    <ClInclude Include="Greedy_Q2873(예외처리 잔뜩 적용).h" />
     <ClInclude Include="Imp_Q10810.h" />
     <ClInclude Include="Imp_Q10813.h" />
     <ClInclude Include="Imp_Q11005_진접변환2.h" />
