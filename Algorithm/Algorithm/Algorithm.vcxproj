@@ -146,7 +146,12 @@
     <ClInclude Include="DataStructure_Q3190.h" />
     <ClInclude Include="DFS_Q1987.h" />
     <ClInclude Include="Dijkstra_Q1916r.h" />
+    <ClInclude Include="DP_Q11726.h" />
+    <ClInclude Include="DP_Q11727.h" />
+    <ClInclude Include="DP_Q1311.h" />
+    <ClInclude Include="DP_Q13976(격자 채우기).h" />
     <ClInclude Include="DP_Q14501.h" />
+    <ClInclude Include="DP_Q2193.h" />
     <ClInclude Include="Greedy_Q1339(단어 더하기).h" />
     <ClInclude Include="Greedy_Q14939(불끄기).h" />
     <ClInclude Include="Greedy_Q16496.h" />
@@ -176,6 +181,7 @@
     <ClInclude Include="PrefixSum_Q16139(알파벳 덧셈).h" />
     <ClInclude Include="PrefixSum_Q2559(날씨 구간 중 최대 찾기).h" />
     <ClInclude Include="PrefixSum_Q25682%28체스판%29.h" />
+    <ClInclude Include="Recursion_Q17829.h" />
     <ClInclude Include="Recursion_Q4779.h" />
     <ClInclude Include="Set_Q25192.h" />
     <ClInclude Include="Set_Q26069.h" />

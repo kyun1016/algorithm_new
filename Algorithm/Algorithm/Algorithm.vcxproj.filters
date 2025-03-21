@@ -266,11 +266,29 @@
     <ClInclude Include="Greedy_Q14939(불끄기).h">
       <Filter>Header Files\Greedy</Filter>
     </ClInclude>
-    <ClInclude Include="Greedy_Q2873(예외처리 잔뜩 적용).h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BackTracking_DFS_Q1799(Queen).h">
       <Filter>Header Files\BackTracking</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Q13976(격자 채우기).h">
+      <Filter>Header Files\DP</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Q1311.h">
+      <Filter>Header Files\DP</Filter>
+    </ClInclude>
+    <ClInclude Include="Greedy_Q2873(예외처리 잔뜩 적용).h">
+      <Filter>Header Files\Greedy</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Q11726.h">
+      <Filter>Header Files\DP</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Q11727.h">
+      <Filter>Header Files\DP</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Q2193.h">
+      <Filter>Header Files\DP</Filter>
+    </ClInclude>
+    <ClInclude Include="Recursion_Q17829.h">
+      <Filter>Header Files\Recursion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
