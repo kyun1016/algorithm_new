@@ -290,6 +290,15 @@
     <ClInclude Include="Recursion_Q17829.h">
       <Filter>Header Files\Recursion</Filter>
     </ClInclude>
+    <ClInclude Include="Merge_Q1517%28버블소트%29.h">
+      <Filter>Header Files\Sort</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack_Q28278.h">
+      <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Dijkstra_Q13549.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestData\Q25314\Output1.txt">

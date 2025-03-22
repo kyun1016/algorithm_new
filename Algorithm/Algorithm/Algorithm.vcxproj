@@ -161,6 +161,8 @@
     <ClInclude Include="Greedy_Q18185.h" />
     <ClInclude Include="Greedy_Q2437(저울).h" />
     <ClInclude Include="Greedy_Q2873(예외처리 잔뜩 적용).h" />
+    <ClInclude Include="Dijkstra_Q13549.h" />
+    <ClInclude Include="Stack_Q28278.h" />
     <ClInclude Include="Imp_Q10810.h" />
     <ClInclude Include="Imp_Q10813.h" />
     <ClInclude Include="Imp_Q11005_진접변환2.h" />
@@ -174,6 +176,7 @@
     <ClInclude Include="Math_Q2903_PLANINA(4분할).h" />
     <ClInclude Include="Math_Q9063(사각형).h" />
     <ClInclude Include="Math_Q9506_약수_완전수.h" />
+    <ClInclude Include="Merge_Q1517%28버블소트%29.h" />
     <ClInclude Include="Merge_Q24060_MergeSort구현.h" />
     <ClInclude Include="MinimumSpanningTree_Union_Q1922.h" />
     <ClInclude Include="PrefixSum_Q10986%28나머지합%29.h" />
