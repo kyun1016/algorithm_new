@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -21,23 +22,22 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-#include <map>
 #include <unordered_set>
 #include <iomanip>
 #include <numeric>
 #include <set>
 
 #define OUT
-constexpr int Q_NAME = 7785;
+constexpr int Q_NAME = 14215;
 
 #if defined(DEBUG) || defined(_DEBUG)
-	#define Q_INPUT_INIT() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_INIT() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#define Q_INPUT_INIT() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_INIT() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_INIT() using namespace std;
-	#define Q_SOLUTION_INIT() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_INIT() using namespace std;
+#define Q_SOLUTION_INIT() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -203,25 +203,28 @@ private:
 	{
 		Q_INPUT_INIT();
 
-		int a;
-		cin >> a;
-
-		for (int i = 0; i < a; ++i)
-		{
-			std::string name, type;
-			cin >> name >> type;
-			if (type == "enter")
-				_set.insert(name);
-			else
-				_set.erase(name);
-		}
+		cin >> a >> b >> c;
 	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_INIT();
 
-		for (auto it = _set.rbegin(); it != _set.rend(); ++it)
-			cout << *it << '\n';
+		int ab = a + b;
+		int bc = b + c;
+		int ca = c + a;
+
+		int ans = 0;
+
+		if (ab <= c)
+			ans = ab + ab - 1;
+		else if (bc <= a)
+			ans = bc + bc - 1;
+		else if (ca <= b)
+			ans = ca + ca - 1;
+		else
+			ans = a + b + c;
+
+		cout << ans;
 
 		Q_SOLUTION_END();
 	}
@@ -230,7 +233,7 @@ private:
 
 	}
 private:
-	std::set<std::string> _set;
+	int a, b, c;
 };
 
 /*--------------------

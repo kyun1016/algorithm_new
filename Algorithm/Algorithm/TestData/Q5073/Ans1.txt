@@ -1,0 +1,5 @@
+Equilateral
+Scalene
+Invalid
+Isosceles
+

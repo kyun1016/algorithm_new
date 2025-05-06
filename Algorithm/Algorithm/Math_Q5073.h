@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -21,23 +22,22 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-#include <map>
 #include <unordered_set>
 #include <iomanip>
 #include <numeric>
 #include <set>
 
 #define OUT
-constexpr int Q_NAME = 7785;
+constexpr int Q_NAME = 5073;
 
 #if defined(DEBUG) || defined(_DEBUG)
-	#define Q_INPUT_INIT() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_INIT() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#define Q_INPUT_INIT() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_INIT() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_INIT() using namespace std;
-	#define Q_SOLUTION_INIT() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_INIT() using namespace std;
+#define Q_SOLUTION_INIT() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -202,26 +202,39 @@ private:
 	virtual void Input()
 	{
 		Q_INPUT_INIT();
-
-		int a;
-		cin >> a;
-
-		for (int i = 0; i < a; ++i)
+		int a = 1, b = 1, c = 1;
+		while (true)
 		{
-			std::string name, type;
-			cin >> name >> type;
-			if (type == "enter")
-				_set.insert(name);
-			else
-				_set.erase(name);
+			cin >> a >> b >> c;
+			if (a == 0 && b == 0 && c == 0) break;
+			_arr.push_back(a);
+			_arr.push_back(b);
+			_arr.push_back(c);
 		}
 	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_INIT();
 
-		for (auto it = _set.rbegin(); it != _set.rend(); ++it)
-			cout << *it << '\n';
+		for (int i = 0; i < _arr.size(); i += 3)
+		{
+			int a = _arr[i];
+			int b = _arr[i + 1];
+			int c = _arr[i + 2];
+			if (a == 0 && b == 0 && c == 0) break;
+
+			if (a + b <= c || a + c <= b || b + c <= a)
+			{
+				cout << "Invalid\n";
+				continue;
+			}
+			if (a == b && a == c)
+				cout << "Equilateral\n";
+			else if (a == b || b == c || a == c)
+				cout << "Isosceles\n";
+			else
+				cout << "Scalene\n";
+		}
 
 		Q_SOLUTION_END();
 	}
@@ -230,19 +243,5 @@ private:
 
 	}
 private:
-	std::set<std::string> _set;
+	std::vector<int> _arr;
 };
-
-/*--------------------
-* main
---------------------*/
-int main()
-{
-#if defined(DEBUG) || defined(_DEBUG) 
-	// QHelper::SaveTest("./TestData/Q" + std::to_string(Q_NAME) + "/", 1);
-#endif
-	QHelper::Init();
-	std::unique_ptr<QBase> q = std::make_unique<QSolve>();
-	q->Solve(1);
-	return 0;
-}

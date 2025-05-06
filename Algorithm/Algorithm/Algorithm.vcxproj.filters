@@ -299,6 +299,18 @@
     <ClInclude Include="Dijkstra_Q13549.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math_Q10101(삼각형 외우기).h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_Q5073.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_Q14215(세 막대).h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort_Q7785(unordered_map).h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestData\Q25314\Output1.txt">

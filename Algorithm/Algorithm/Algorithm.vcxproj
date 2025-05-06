@@ -162,6 +162,10 @@
     <ClInclude Include="Greedy_Q2437(저울).h" />
     <ClInclude Include="Greedy_Q2873(예외처리 잔뜩 적용).h" />
     <ClInclude Include="Dijkstra_Q13549.h" />
+    <ClInclude Include="math_Q10101(삼각형 외우기).h" />
+    <ClInclude Include="Math_Q14215(세 막대).h" />
+    <ClInclude Include="Math_Q5073.h" />
+    <ClInclude Include="Sort_Q7785(unordered_map).h" />
     <ClInclude Include="Stack_Q28278.h" />
     <ClInclude Include="Imp_Q10810.h" />
     <ClInclude Include="Imp_Q10813.h" />
