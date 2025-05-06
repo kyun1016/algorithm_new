@@ -144,6 +144,7 @@
     <ClInclude Include="BinarySearch_Q2143.h" />
     <ClInclude Include="DataStructure_Q1764.h" />
     <ClInclude Include="DataStructure_Q3190.h" />
+    <ClInclude Include="Deque_28279.h" />
     <ClInclude Include="DFS_Q1987.h" />
     <ClInclude Include="Dijkstra_Q1916r.h" />
     <ClInclude Include="DP_Q11726.h" />
@@ -165,6 +166,8 @@
     <ClInclude Include="Greedy_Q2437(저울).h" />
     <ClInclude Include="Greedy_Q2873(예외처리 잔뜩 적용).h" />
     <ClInclude Include="Dijkstra_Q13549.h" />
+    <ClInclude Include="Math_13909.h" />
+    <ClInclude Include="Prime_17103%28속도 개선 및 싱글턴 기능 추가%29.h" />
     <ClInclude Include="Math_1735.h" />
     <ClInclude Include="Math_2485(GCD).h" />
     <ClInclude Include="math_Q10101(삼각형 외우기).h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="Sort_1269(set).h" />
     <ClInclude Include="Sort_Q7785(Set 활용).h" />
     <ClInclude Include="Sort_Q7785(unordered_map).h" />
+    <ClInclude Include="Stack_12789.h" />
     <ClInclude Include="Stack_Q28278.h" />
     <ClInclude Include="Imp_Q10810.h" />
     <ClInclude Include="Imp_Q10813.h" />

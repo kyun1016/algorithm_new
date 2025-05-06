@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -26,20 +27,18 @@
 #include <iomanip>
 #include <numeric>
 #include <set>
-#include <list>
 
 #pragma region BOJHelper
 #define OUT
-#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -160,7 +159,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line == line2);
-			if(line == line2)
+			if (line == line2)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Error, [" << i++ << " Line] Test Fail - Type 2\n";
@@ -213,15 +212,15 @@ protected:
 };
 #pragma endregion BOJHelper
 
-constexpr int Q_NAME = 2346;
+constexpr int Q_NAME = 28279;
 
 class QSolve : public QBase
 {
 private:
-	QSolve() : QBase(Q_NAME) { };
-	virtual ~QSolve(){ gQBase = nullptr; };
+	QSolve() : QBase(Q_NAME) {};
+	virtual ~QSolve() { gQBase = nullptr; };
 public: // Singleton
-	inline static QBase* GetInstance() { 
+	inline static QBase* GetInstance() {
 		if (!gQBase)
 			gQBase = new QSolve();
 		return gQBase;
@@ -229,7 +228,6 @@ public: // Singleton
 private:
 	using uint = std::uint32_t;
 	using integer = std::int32_t;
-	using iter = std::list<std::int32_t>::iterator;
 	enum class eDeckOrder : std::uint8_t
 	{
 		None = 0,
@@ -242,34 +240,9 @@ private:
 		Front = 7,
 		Back = 8
 	};
-	
-	std::vector<std::int32_t> _arr;
-private:
-	void MoveIter(
-		OUT iter& it, 
-		IN std::list<std::int32_t>& list,
-		IN int num)
-	{
-		if (it == list.end())
-			it = list.begin();
-		while (num > 0)
-		{
-			if (it == list.end())
-				it = list.begin();
-			++it;
-			if (it == list.end())
-				it = list.begin();
-			--num;
-		}
-		while (num < 0)
-		{
-			if (it == list.begin())
-				it = list.end();
-			--it;
-			++num;
-		}
-	}
 
+	std::vector<std::pair<eDeckOrder, std::int32_t>> _arr;
+private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
@@ -279,35 +252,63 @@ private:
 		_arr.resize(temp);
 		for (auto& a : _arr)
 		{
-			cin >> a;
+			cin >> temp;
+			a.first = (eDeckOrder)temp;
+			if (a.first == eDeckOrder::PushFront || a.first == eDeckOrder::PushBack)
+			{
+				cin >> a.second;
+			}
 		}
 	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
 
-		std::list<std::int32_t> list;
-		for (size_t i = 1; i <= _arr.size(); ++i)
-			list.push_back(i);
-
-		iter it = list.begin();
-
-		int order = 0;
-		for (size_t i=0; i<_arr.size(); ++i)
+		std::deque<std::int32_t> dq;
+		for (const auto& a : _arr)
 		{
-			cout << *it << ' ';
-			int moveCount = _arr[*it - 1];
-			if(moveCount > 0)
-				--moveCount;
-			it = list.erase(it);
-			if(!list.empty())
-				MoveIter(it, list, moveCount);
+			if (a.first == eDeckOrder::PushFront)
+				dq.push_front(a.second);
+			else if (a.first == eDeckOrder::PushBack)
+				dq.push_back(a.second);
+			else if (a.first == eDeckOrder::PopFront)
+				if (dq.empty())
+					cout << "-1\n";
+				else
+				{
+					cout << dq.front() << '\n';
+					dq.pop_front();
+				}
+			else if (a.first == eDeckOrder::PopBack)
+				if (dq.empty())
+					cout << "-1\n";
+				else
+				{
+					cout << dq.back() << '\n';
+					dq.pop_back();
+				}
+			else if (a.first == eDeckOrder::Size)
+				cout << dq.size() << '\n';
+			else if (a.first == eDeckOrder::Empty)
+				if (dq.empty())
+					cout << "1\n";
+				else
+					cout << "0\n";
+			else if (a.first == eDeckOrder::Front)
+				if (dq.empty())
+					cout << "-1\n";
+				else
+					cout << dq.front() << '\n';
+			else if (a.first == eDeckOrder::Back)
+				if (dq.empty())
+					cout << "-1\n";
+				else
+					cout << dq.back() << '\n';
 		}
-
 
 		Q_SOLUTION_END();
 	}
-	virtual void Delete() { }
+	virtual void Delete() {}
 };
 
 /*--------------------

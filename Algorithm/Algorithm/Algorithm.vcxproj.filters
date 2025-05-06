@@ -329,13 +329,25 @@
     <ClInclude Include="Math_1735.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Math_2485(GCD).h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Prime_17103(간단한 버전).h">
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="Prime_4134(소수).h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Prime_17103%28속도 개선 및 싱글턴 기능 추가%29.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_2485(GCD).h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_13909.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack_12789.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Prime_17103(간단한 버전).h">
+    <ClInclude Include="Deque_28279.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -33,13 +34,13 @@
 #define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -160,7 +161,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line == line2);
-			if(line == line2)
+			if (line == line2)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Error, [" << i++ << " Line] Test Fail - Type 2\n";
@@ -218,10 +219,10 @@ constexpr int Q_NAME = 2346;
 class QSolve : public QBase
 {
 private:
-	QSolve() : QBase(Q_NAME) { };
-	virtual ~QSolve(){ gQBase = nullptr; };
+	QSolve() : QBase(Q_NAME) {};
+	virtual ~QSolve() { gQBase = nullptr; };
 public: // Singleton
-	inline static QBase* GetInstance() { 
+	inline static QBase* GetInstance() {
 		if (!gQBase)
 			gQBase = new QSolve();
 		return gQBase;
@@ -242,11 +243,11 @@ private:
 		Front = 7,
 		Back = 8
 	};
-	
+
 	std::vector<std::int32_t> _arr;
 private:
 	void MoveIter(
-		OUT iter& it, 
+		OUT iter& it,
 		IN std::list<std::int32_t>& list,
 		IN int num)
 	{
@@ -293,21 +294,21 @@ private:
 		iter it = list.begin();
 
 		int order = 0;
-		for (size_t i=0; i<_arr.size(); ++i)
+		for (size_t i = 0; i < _arr.size(); ++i)
 		{
 			cout << *it << ' ';
 			int moveCount = _arr[*it - 1];
-			if(moveCount > 0)
+			if (moveCount > 0)
 				--moveCount;
 			it = list.erase(it);
-			if(!list.empty())
+			if (!list.empty())
 				MoveIter(it, list, moveCount);
 		}
 
 
 		Q_SOLUTION_END();
 	}
-	virtual void Delete() { }
+	virtual void Delete() {}
 };
 
 /*--------------------
