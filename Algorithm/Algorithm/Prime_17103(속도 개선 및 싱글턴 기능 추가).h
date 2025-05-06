@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -31,13 +32,13 @@
 #define OUT
 
 #if defined(DEBUG) || defined(_DEBUG)
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -208,7 +209,7 @@ class QSolve : public QBase
 {
 private:
 	QSolve() : QBase(Q_NAME) {
-		
+
 	};
 	virtual ~QSolve()
 	{
@@ -282,7 +283,7 @@ private:
 		uint temp;
 		cin >> temp;
 		_arr.resize(temp);
-		for (auto& a: _arr)
+		for (auto& a : _arr)
 			cin >> a;
 	}
 	virtual void Solution()
@@ -292,7 +293,7 @@ private:
 		for (const auto& a : _arr)
 		{
 			int ret = 0;
-			for (const auto& i: _prime)
+			for (const auto& i : _prime)
 			{
 				if (i > a / 2)
 					break;

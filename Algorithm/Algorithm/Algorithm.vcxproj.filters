@@ -296,19 +296,46 @@
     <ClInclude Include="Stack_Q28278.h">
       <Filter>Header Files\DataStructure</Filter>
     </ClInclude>
-    <ClInclude Include="Dijkstra_Q13549.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math_Q10101(삼각형 외우기).h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math_Q5073.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Sort_Q7785(unordered_map).h">
+      <Filter>Header Files\Sort</Filter>
     </ClInclude>
     <ClInclude Include="Math_Q14215(세 막대).h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_Q5073.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math_Q10101(삼각형 외우기).h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Dijkstra_Q13549.h">
+      <Filter>Header Files\Dijkstra</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort_Q7785(Set 활용).h">
+      <Filter>Header Files\Sort</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort_1269(set).h">
+      <Filter>Header Files\Sort</Filter>
+    </ClInclude>
+    <ClInclude Include="easy_24265.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sort_Q7785(unordered_map).h">
+    <ClInclude Include="easy_24266.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="easy_24267.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_1735.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math_2485(GCD).h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Prime_4134(소수).h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Prime_17103(간단한 버전).h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

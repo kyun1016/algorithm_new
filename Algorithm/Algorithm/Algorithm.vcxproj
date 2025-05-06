@@ -152,6 +152,9 @@
     <ClInclude Include="DP_Q13976(격자 채우기).h" />
     <ClInclude Include="DP_Q14501.h" />
     <ClInclude Include="DP_Q2193.h" />
+    <ClInclude Include="easy_24265.h" />
+    <ClInclude Include="easy_24266.h" />
+    <ClInclude Include="easy_24267.h" />
     <ClInclude Include="Greedy_Q1339(단어 더하기).h" />
     <ClInclude Include="Greedy_Q14939(불끄기).h" />
     <ClInclude Include="Greedy_Q16496.h" />
@@ -162,9 +165,15 @@
     <ClInclude Include="Greedy_Q2437(저울).h" />
     <ClInclude Include="Greedy_Q2873(예외처리 잔뜩 적용).h" />
     <ClInclude Include="Dijkstra_Q13549.h" />
+    <ClInclude Include="Math_1735.h" />
+    <ClInclude Include="Math_2485(GCD).h" />
     <ClInclude Include="math_Q10101(삼각형 외우기).h" />
     <ClInclude Include="Math_Q14215(세 막대).h" />
     <ClInclude Include="Math_Q5073.h" />
+    <ClInclude Include="Prime_17103(간단한 버전).h" />
+    <ClInclude Include="Prime_4134(소수).h" />
+    <ClInclude Include="Sort_1269(set).h" />
+    <ClInclude Include="Sort_Q7785(Set 활용).h" />
     <ClInclude Include="Sort_Q7785(unordered_map).h" />
     <ClInclude Include="Stack_Q28278.h" />
     <ClInclude Include="Imp_Q10810.h" />

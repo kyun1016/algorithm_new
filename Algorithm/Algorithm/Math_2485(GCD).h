@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -31,13 +32,13 @@
 #define OUT
 
 #if defined(DEBUG) || defined(_DEBUG)
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -159,7 +160,7 @@ public:
 
 class QBase
 {
-protected:
+public:
 	QBase() = default;
 	QBase(std::string num)
 		: _dir("./TestData/Q" + num + "/")
@@ -174,15 +175,7 @@ protected:
 	virtual ~QBase() = default;
 	QBase(const QBase& rhs) = delete;
 	QBase& operator=(const QBase& rhs) = delete;
-public: // Singleton
-	void Release()
-	{
-		if (gQBase)
-		{
-			delete gQBase;
-			gQBase = nullptr;
-		}
-	}
+
 public:
 	virtual void Solve(const int& testCase = 1)
 	{
@@ -196,111 +189,61 @@ private:
 	virtual void Solution() = 0;
 	virtual void Delete() = 0;
 protected:
-	inline static QBase* gQBase;
 	int _testCase = 1;
 	std::string _dir = "./TestData/Q99999/";
 };
 #pragma endregion BOJHelper
 
-constexpr int Q_NAME = 17103;
+constexpr int Q_NAME = 2485;
 
 class QSolve : public QBase
 {
-private:
-	QSolve() : QBase(Q_NAME) {
-		
-	};
-	virtual ~QSolve()
-	{
-		gQBase = nullptr;
-	};
-public: // Singleton
-	inline static QBase* GetInstance()
-	{
-		if (!gQBase)
-		{
-			gQBase = new QSolve();
-		}
-		return gQBase;
-	}
-private:
+public:
+	QSolve() : QBase(Q_NAME) {};
+	virtual ~QSolve() = default;
+
 	using uint = unsigned long long;
-	using si = uint8_t;
-	enum class ePrimeState : si
-	{
-		NotPrime = 0,
-		IsPrime = 1
-	};
-
-	std::vector<ePrimeState> _primeCache;
-	std::vector<int> _prime;
-	std::vector<int> _arr;
-	static constexpr int MAX_NUM = 1'000'000;
 private:
-	bool SetPrimeTable()	// late Initialize
+	int GCD(int a, int b)
 	{
-		if (!_primeCache.empty())
-			return false;
-
-		_primeCache.resize(MAX_NUM + 1, ePrimeState::IsPrime);
-
-		_primeCache[0] = ePrimeState::NotPrime;
-		_primeCache[1] = ePrimeState::NotPrime;
-		for (int i = 2; i * i <= MAX_NUM; ++i)
+		while (b != 0)
 		{
-			if (_primeCache[i] == ePrimeState::IsPrime)
-				for (int j = i * i; j <= MAX_NUM; j += i)
-					_primeCache[j] = ePrimeState::NotPrime;
+			int t = b;
+			b = a % b;
+			a = t;
 		}
-
-		_primeCache.reserve(78'498);
-		for (int i = 2; i <= MAX_NUM; ++i)
-		{
-			if (_primeCache[i] == ePrimeState::IsPrime)
-				_prime.push_back(i);
-		}
-
-
-		return true;
-	}
-	inline bool IsPrime(int n)
-	{
-		assert(n >= 0 && n <= MAX_NUM);
-		assert(!_primeCache.empty());
-
-		if (_primeCache[n] == ePrimeState::NotPrime)
-			return false;
-		else
-			return true;
+		return a;
 	}
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
 
-		SetPrimeTable();
-
-		uint temp;
+		int temp;
 		cin >> temp;
-		_arr.resize(temp);
-		for (auto& a: _arr)
-			cin >> a;
+
+		uint a;
+		uint b;
+		cin >> a;
+		for (int i = 1; i < temp; ++i)
+		{
+			cin >> b;
+			_arr[b - a]++;
+			a = b;
+		}
 	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
 
+		int min = _arr.begin()->first;
 		for (const auto& a : _arr)
-		{
-			int ret = 0;
-			for (const auto& i: _prime)
-			{
-				if (i > a / 2)
-					break;
-				if (IsPrime(a - i))
-					++ret;
-			}
-			cout << ret << '\n';
-		}
+			min = GCD(min, a.first);
+
+		int ret = 0;
+		for (const auto& a : _arr)
+			ret += a.second * (a.first / min - 1);
+
+		cout << ret << '\n';
 
 		Q_SOLUTION_END();
 	}
@@ -308,6 +251,8 @@ private:
 	{
 		_arr.clear();
 	}
+private:
+	std::unordered_map<int, int> _arr;
 };
 
 /*--------------------
@@ -316,10 +261,10 @@ private:
 int main()
 {
 #if defined(DEBUG) || defined(_DEBUG) 
-	// QHelper::SaveTest("./TestData/Q" + std::to_string(Q_NAME) + "/", 1);
+	//QHelper::SaveTest("./TestData/Q" + std::to_string(Q_NAME) + "/", 2);
 #endif
 	QHelper::Init();
-
-	QSolve::GetInstance()->Solve(1);
+	std::unique_ptr<QBase> q = std::make_unique<QSolve>();
+	q->Solve(1);
 	return 0;
 }
