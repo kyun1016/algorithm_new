@@ -1,11 +1,13 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
 #include <stdint.h>
-#include <filesystem>
-#include <fstream>
 
+#include <filesystem>
+
+#include <fstream>
 #include <queue>
 #include <stack>
 #include <string>
@@ -26,18 +28,19 @@
 #include <numeric>
 #include <set>
 #include <list>
-#include <cmath>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
+
 #if defined(DEBUG) || defined(_DEBUG)
-	#include <io.h>
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -158,7 +161,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line == line2);
-			if(line == line2)
+			if (line == line2)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Error, [" << i++ << " Line] Test Fail - Type 2\n";
@@ -211,18 +214,15 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 2696;
+constexpr int Q_NAME = 24511;
 
 class QSolve : public QBase
 {
 private:
-	QSolve() : QBase(Q_NAME) { };
-	virtual ~QSolve(){ gQBase = nullptr; };
+	QSolve() : QBase(Q_NAME) {};
+	virtual ~QSolve() { gQBase = nullptr; };
 public: // Singleton
-	inline static QBase* GetInstance() { 
+	inline static QBase* GetInstance() {
 		if (!gQBase)
 			gQBase = new QSolve();
 		return gQBase;
@@ -235,20 +235,15 @@ private:
 	{
 		Queue = 0,
 		Stack = 1
-	}; 
+	};
 
-	struct Coord
-	{
-		std::int32_t x;
-		std::int32_t y;
+	struct QueueStackData {
+		eMemoryType type;
+		std::int32_t data;
 	};
-	struct InputData
-	{
-		Coord begin;
-		Coord end;
-	};
-	
-	std::vector<std::vector<std::int32_t>> _arr;
+	std::vector<QueueStackData> _arr;
+	std::vector<std::int32_t> _input;
+	std::queue<std::int32_t> _queue;
 private:
 	virtual void Input()
 	{
@@ -257,62 +252,41 @@ private:
 		int temp;
 		cin >> temp;
 		_arr.resize(temp);
-
-		for (auto& arr : _arr)
+		for (auto& a : _arr)
 		{
 			cin >> temp;
-			arr.resize(temp);
-			for (auto& d : arr)
-				cin >> d;
+			a.type = (eMemoryType)temp;
 		}
+		for (auto& a : _arr)
+			cin >> a.data;
+
+		cin >> temp;
+		_input.resize(temp);
+		for (auto& a : _input)
+			cin >> a;
+
 	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
 
-		for (const auto& tb : _arr)
+		std::queue<std::int32_t> qu;
+		for (auto iter = _arr.rbegin(); iter != _arr.rend(); ++iter)
 		{
-			std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
-			std::priority_queue<int, std::vector<int>, std::less<int>> maxHeap;
-			int middle = tb[0];
-
-			cout << tb.size() / 2 + 1 << '\n';
-			cout << middle << ' ';
-			for (size_t i = 1; i < tb.size(); ++i)
-			{
-				auto& data = tb[i];
-				if (data > middle)
-					minHeap.push(data);
-				else
-					maxHeap.push(data);
-
-				if (i % 2) continue;
-				
-				if (minHeap.size() < maxHeap.size())
-				{
-					minHeap.push(middle);
-					middle = maxHeap.top();
-					maxHeap.pop();
-				}
-				else if (maxHeap.size() < minHeap.size())
-				{
-					maxHeap.push(middle);
-					middle = minHeap.top();
-					minHeap.pop();
-				}
-				if (i % 20 == 0)
-					cout << '\n';
-				cout << middle << ' ';
-			}
-			cout << '\n';
+			if (iter->type == eMemoryType::Queue)
+				qu.push(iter->data);
 		}
 
+		for (const auto& a : _input)
+		{
+			qu.push(a);
+			cout << qu.front() << ' ';
+			qu.pop();
+		}
 
 		Q_SOLUTION_END();
 	}
-	virtual void Delete() {
-		_arr.clear();
-	}
+	virtual void Delete() {}
 };
 
 /*--------------------
@@ -320,20 +294,11 @@ private:
 --------------------*/
 int main()
 {
+#if defined(DEBUG) || defined(_DEBUG) 
+	// QHelper::SaveTest("./TestData/Q" + std::to_string(Q_NAME) + "/", 2);
+#endif
 	QHelper::Init();
 
-#if defined(DEBUG) || defined(_DEBUG)
-	const int Q_COUNT = 1;
-	const std::string FILE_DIR = "./TestData/Q" + std::to_string(Q_NAME) + "/";
-	const std::string FULL_FILE_DIR = FILE_DIR + "Output" + std::to_string(Q_COUNT) + ".txt";
-	if (_access(FULL_FILE_DIR.c_str(), 0))
-		QHelper::SaveTest(FILE_DIR, Q_COUNT);
-
-	for (int i = 1; i <= Q_COUNT; ++i)
-		QSolve::GetInstance()->Solve(i);	// Verification
-#else
 	QSolve::GetInstance()->Solve(1);
-#endif
-
 	return 0;
 }

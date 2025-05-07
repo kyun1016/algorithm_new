@@ -344,10 +344,25 @@
     <ClInclude Include="Math_13909.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Stack_12789.h">
+    <ClInclude Include="Queue_24511.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Deque_28279.h">
+      <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack_12789.h">
+      <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Combination_15439.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Combination_24723.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="list_2346.h">
+      <Filter>Header Files\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="PrefixSum_11660(Table 찾기).h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

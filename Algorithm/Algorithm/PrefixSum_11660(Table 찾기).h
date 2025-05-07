@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -30,14 +31,14 @@
 
 #pragma region BOJHelper
 #if defined(DEBUG) || defined(_DEBUG)
-	#include <io.h>
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#include <io.h>
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -158,7 +159,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line == line2);
-			if(line == line2)
+			if (line == line2)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Error, [" << i++ << " Line] Test Fail - Type 2\n";
@@ -214,15 +215,15 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 2696;
+constexpr int Q_NAME = 11660;
 
 class QSolve : public QBase
 {
 private:
-	QSolve() : QBase(Q_NAME) { };
-	virtual ~QSolve(){ gQBase = nullptr; };
+	QSolve() : QBase(Q_NAME) {};
+	virtual ~QSolve() { gQBase = nullptr; };
 public: // Singleton
-	inline static QBase* GetInstance() { 
+	inline static QBase* GetInstance() {
 		if (!gQBase)
 			gQBase = new QSolve();
 		return gQBase;
@@ -235,7 +236,7 @@ private:
 	{
 		Queue = 0,
 		Stack = 1
-	}; 
+	};
 
 	struct Coord
 	{
@@ -247,71 +248,75 @@ private:
 		Coord begin;
 		Coord end;
 	};
-	
-	std::vector<std::vector<std::int32_t>> _arr;
+
+	std::vector<std::vector<std::int32_t>> _table;
+	std::vector<std::vector<std::uint32_t>> _sumTable;
+	std::vector<InputData> _input;
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
 
-		int temp;
-		cin >> temp;
-		_arr.resize(temp);
+		int size, count;
+		cin >> size >> count;
+		_table.resize(size, std::vector<std::int32_t>(size));	// N x N Table 생성
+		_sumTable.resize(size, std::vector<std::uint32_t>(size));	// N x N Table 생성
+		_input.resize(count);
 
-		for (auto& arr : _arr)
+
+		for (auto& row : _table)
+			for (auto& data : row)
+				cin >> data;
+		for (size_t y = 0; y < size; ++y)
 		{
-			cin >> temp;
-			arr.resize(temp);
-			for (auto& d : arr)
-				cin >> d;
+			if (y == 0)
+				_sumTable[y][0] = _table[y][0];
+			else
+				_sumTable[y][0] = _table[y][0] + _sumTable[y - 1][0];
+			for (size_t x = 1; x < size; ++x)
+			{
+				if (y == 0)
+					_sumTable[y][x]
+					= _table[y][x] + _sumTable[y][x - 1];
+				else
+					_sumTable[y][x]
+					= _table[y][x]
+						+ (_sumTable[y][x - 1] - _sumTable[y - 1][x - 1])
+							+ (_sumTable[y - 1][x]);
+			}
 		}
+		for (auto& d : _input)
+		{
+			cin >> d.begin.y >> d.begin.x >> d.end.y >> d.end.x;	// 위의 행렬을 잘못 맵핑하여, 해당 구간에서 반전하여 문제를 풀이함 (x<->y 반전)
+			--d.begin.x;
+			--d.begin.y;
+			--d.end.x;
+			--d.end.y;
+		}
+
 	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
 
-		for (const auto& tb : _arr)
+		for (const auto& d : _input)
 		{
-			std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
-			std::priority_queue<int, std::vector<int>, std::less<int>> maxHeap;
-			int middle = tb[0];
-
-			cout << tb.size() / 2 + 1 << '\n';
-			cout << middle << ' ';
-			for (size_t i = 1; i < tb.size(); ++i)
-			{
-				auto& data = tb[i];
-				if (data > middle)
-					minHeap.push(data);
-				else
-					maxHeap.push(data);
-
-				if (i % 2) continue;
-				
-				if (minHeap.size() < maxHeap.size())
-				{
-					minHeap.push(middle);
-					middle = maxHeap.top();
-					maxHeap.pop();
-				}
-				else if (maxHeap.size() < minHeap.size())
-				{
-					maxHeap.push(middle);
-					middle = minHeap.top();
-					minHeap.pop();
-				}
-				if (i % 20 == 0)
-					cout << '\n';
-				cout << middle << ' ';
-			}
-			cout << '\n';
+			if (d.begin.x == 0 && d.begin.y == 0)
+				cout << _sumTable[d.end.y][d.end.x] << '\n';
+			else if (d.begin.y == 0)
+				cout << _sumTable[d.end.y][d.end.x] - _sumTable[d.end.y][d.begin.x - 1] << '\n';
+			else if (d.begin.x == 0)
+				cout << _sumTable[d.end.y][d.end.x] - _sumTable[d.begin.y - 1][d.end.x] << '\n';
+			else
+				cout << _sumTable[d.end.y][d.end.x] - _sumTable[d.begin.y - 1][d.end.x] - _sumTable[d.end.y][d.begin.x - 1] + _sumTable[d.begin.y - 1][d.begin.x - 1] << '\n';
 		}
-
 
 		Q_SOLUTION_END();
 	}
 	virtual void Delete() {
-		_arr.clear();
+		_table.clear();
+		_sumTable.clear();
+		_input.clear();
 	}
 };
 
@@ -323,7 +328,7 @@ int main()
 	QHelper::Init();
 
 #if defined(DEBUG) || defined(_DEBUG)
-	const int Q_COUNT = 1;
+	const int Q_COUNT = 2;
 	const std::string FILE_DIR = "./TestData/Q" + std::to_string(Q_NAME) + "/";
 	const std::string FULL_FILE_DIR = FILE_DIR + "Output" + std::to_string(Q_COUNT) + ".txt";
 	if (_access(FULL_FILE_DIR.c_str(), 0))
