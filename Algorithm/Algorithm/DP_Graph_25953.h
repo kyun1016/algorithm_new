@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -30,14 +31,14 @@
 
 #pragma region BOJHelper
 #if defined(DEBUG) || defined(_DEBUG)
-	#include <io.h>
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#include <io.h>
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -158,7 +159,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line == line2);
-			if(line == line2)
+			if (line == line2)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Error, [" << i++ << " Line] Test Fail - Type 2\n";
@@ -214,15 +215,15 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 2169;
+constexpr int Q_NAME = 25953;
 
 class QSolve : public QBase
 {
 private:
-	QSolve() : QBase(Q_NAME) { };
-	virtual ~QSolve(){ gQBase = nullptr; };
+	QSolve() : QBase(Q_NAME) {};
+	virtual ~QSolve() { gQBase = nullptr; };
 public: // Singleton
-	inline static QBase* GetInstance() { 
+	inline static QBase* GetInstance() {
 		if (!gQBase)
 			gQBase = new QSolve();
 		return gQBase;
@@ -232,7 +233,7 @@ private:
 	using integer = std::int32_t;
 	using iter = std::list<std::int32_t>::iterator;
 	constexpr static int INF = 1000000007;
-	
+
 	int _n;
 	int _t;
 	int _m;
@@ -255,11 +256,11 @@ private:
 
 		cin >> _n >> _t >> _m >> _s >> _e;
 
-		_dist.resize(_t+1, std::vector<int>(_n + 1, INF));
+		_dist.resize(_t + 1, std::vector<int>(_n + 1, INF));
 
 		_dist[0][_s] = 0;
 
-		for (int t=0; t<_t;++t)
+		for (int t = 0; t < _t; ++t)
 		{
 			for (int i = 0; i < _n; ++i)
 				_dist[t + 1][i] = _dist[t][i];
@@ -267,8 +268,8 @@ private:
 			for (int i = 0; i < _m; ++i)
 			{
 				cin >> node.s >> node.e >> node.w;
-				_dist[t+1][node.s] = _dist[t+1][node.s] < _dist[t][node.e] + node.w ? _dist[t+1][node.s] : _dist[t][node.e] + node.w;
-				_dist[t+1][node.e] = _dist[t+1][node.e] < _dist[t][node.s] + node.w ? _dist[t+1][node.e] : _dist[t][node.s] + node.w;
+				_dist[t + 1][node.s] = _dist[t + 1][node.s] < _dist[t][node.e] + node.w ? _dist[t + 1][node.s] : _dist[t][node.e] + node.w;
+				_dist[t + 1][node.e] = _dist[t + 1][node.e] < _dist[t][node.s] + node.w ? _dist[t + 1][node.e] : _dist[t][node.s] + node.w;
 			}
 		}
 	}
@@ -301,7 +302,7 @@ int main()
 	QHelper::Init();
 
 #if defined(DEBUG) || defined(_DEBUG)
-	const int Q_COUNT = 1;
+	const int Q_COUNT = 2;
 	const std::string FILE_DIR = "./TestData/Q" + std::to_string(Q_NAME) + "/";
 	const std::string FULL_FILE_DIR = FILE_DIR + "Output" + std::to_string(Q_COUNT) + ".txt";
 	if (_access(FULL_FILE_DIR.c_str(), 0))

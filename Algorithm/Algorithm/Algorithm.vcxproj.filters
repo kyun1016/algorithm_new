@@ -365,6 +365,15 @@
     <ClInclude Include="PrefixSum_11660(Table 찾기).h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Priority_queue_2696.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Graph_2637.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Graph_25953.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestData\Q25314\Output1.txt">

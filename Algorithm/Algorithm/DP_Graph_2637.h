@@ -1,4 +1,5 @@
-﻿#include <cstdio>
+﻿#pragma once
+#include <cstdio>
 #include <cassert>
 #include <cstring>
 #include <cstdlib>
@@ -30,14 +31,14 @@
 
 #pragma region BOJHelper
 #if defined(DEBUG) || defined(_DEBUG)
-	#include <io.h>
-	#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
-	#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
-    #define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
+#include <io.h>
+#define Q_INPUT_BEGIN() std::ifstream cin = QHelper::LoadTestInput(_dir, _testCase);
+#define Q_SOLUTION_BEGIN() std::ofstream cout = QHelper::PrintTestAnswer(_dir, _testCase);
+#define Q_SOLUTION_END() cout << std::endl; cout.close(); QHelper::Score(_dir, _testCase);
 #else
-	#define Q_INPUT_BEGIN() using namespace std;
-	#define Q_SOLUTION_BEGIN() using namespace std;
-    #define Q_SOLUTION_END() 
+#define Q_INPUT_BEGIN() using namespace std;
+#define Q_SOLUTION_BEGIN() using namespace std;
+#define Q_SOLUTION_END() 
 #endif
 #define Q_CLASS_BEGIN(ID) class Q##ID : public QBase	\
 {														\
@@ -158,7 +159,7 @@ public:
 
 			std::cout << line2 << std::endl;
 			// assert(line == line2);
-			if(line == line2)
+			if (line == line2)
 				std::cout << "*Info, [" << i++ << " Line] Test Pass\n";
 			else
 				std::cout << "*Error, [" << i++ << " Line] Test Fail - Type 2\n";
@@ -214,15 +215,15 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 2169;
+constexpr int Q_NAME = 2637;
 
 class QSolve : public QBase
 {
 private:
-	QSolve() : QBase(Q_NAME) { };
-	virtual ~QSolve(){ gQBase = nullptr; };
+	QSolve() : QBase(Q_NAME) {};
+	virtual ~QSolve() { gQBase = nullptr; };
 public: // Singleton
-	inline static QBase* GetInstance() { 
+	inline static QBase* GetInstance() {
 		if (!gQBase)
 			gQBase = new QSolve();
 		return gQBase;
@@ -231,44 +232,46 @@ private:
 	using uint = std::uint32_t;
 	using integer = std::int32_t;
 	using iter = std::list<std::int32_t>::iterator;
-	constexpr static int INF = 1000000007;
-	
-	int _n;
-	int _t;
-	int _m;
-	int _s;
-	int _e;
 
-	struct Node
-	{
-		int s;
-		int e;
-		int w;
-	};
-
-	std::vector<std::vector<int>> _dist;
+	int _N;
+	int _M;
+	std::vector<std::vector<std::pair<int, int>>> _arr;
+	std::vector<int> _step;
+	std::vector<int> _use;
 
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
 
-		cin >> _n >> _t >> _m >> _s >> _e;
+		cin >> _N >> _M;
 
-		_dist.resize(_t+1, std::vector<int>(_n + 1, INF));
-
-		_dist[0][_s] = 0;
-
-		for (int t=0; t<_t;++t)
+		_arr.resize(_N + 1);
+		_use.resize(_N + 1, 0);
+		_step.resize(_N + 1, 0);
+		int a, b, c;
+		for (int i = 0; i < _M; ++i)
 		{
-			for (int i = 0; i < _n; ++i)
-				_dist[t + 1][i] = _dist[t][i];
-			Node node;
-			for (int i = 0; i < _m; ++i)
+			cin >> a >> b >> c;
+			_arr[a].push_back({ b,c });
+			_step[b]++;
+		}
+	}
+	void TopologicalSorting(const int& idx, std::queue<int>& qu)
+	{
+		while (!qu.empty())
+		{
+			int cur = qu.front();
+			qu.pop();
+
+			for (const auto& next : _arr[cur])
 			{
-				cin >> node.s >> node.e >> node.w;
-				_dist[t+1][node.s] = _dist[t+1][node.s] < _dist[t][node.e] + node.w ? _dist[t+1][node.s] : _dist[t][node.e] + node.w;
-				_dist[t+1][node.e] = _dist[t+1][node.e] < _dist[t][node.s] + node.w ? _dist[t+1][node.e] : _dist[t][node.s] + node.w;
+				_use[next.first] += next.second * _use[cur];
+				_step[next.first]--;
+				if (_step[next.first] == 0)
+				{
+					qu.push(next.first);
+				}
 			}
 		}
 	}
@@ -277,19 +280,26 @@ private:
 	{
 		Q_SOLUTION_BEGIN();
 
-		if (_dist[_t][_e] == INF)
+		std::queue<int> qu;
+		qu.push(_N);
+		_use[_N] = 1;
+		TopologicalSorting(_N, qu);
+
+		for (size_t i = 1; i < _arr.size(); ++i)
 		{
-			cout << -1;
+			if (_arr[i].empty())
+			{
+				cout << i << " " << _use[i] << '\n';
+			}
 		}
-		else
-		{
-			cout << _dist[_t][_e];
-		}
+
 
 		Q_SOLUTION_END();
 	}
 	virtual void Delete() {
-		_dist.clear();
+		_arr.clear();
+		_use.clear();
+		_step.clear();
 	}
 };
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -149,6 +149,8 @@
     <ClInclude Include="Deque_28279.h" />
     <ClInclude Include="DFS_Q1987.h" />
     <ClInclude Include="Dijkstra_Q1916r.h" />
+    <ClInclude Include="DP_Graph_25953.h" />
+    <ClInclude Include="DP_Graph_2637.h" />
     <ClInclude Include="DP_Q11726.h" />
     <ClInclude Include="DP_Q11727.h" />
     <ClInclude Include="DP_Q1311.h" />
@@ -179,6 +181,7 @@
     <ClInclude Include="Math_Q5073.h" />
     <ClInclude Include="Prime_17103(간단한 버전).h" />
     <ClInclude Include="Prime_4134(소수).h" />
+    <ClInclude Include="Priority_queue_2696.h" />
     <ClInclude Include="Queue_24511.h" />
     <ClInclude Include="Sort_1269(set).h" />
     <ClInclude Include="Sort_Q7785(Set 활용).h" />
