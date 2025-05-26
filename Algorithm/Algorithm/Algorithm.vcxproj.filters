@@ -374,6 +374,9 @@
     <ClInclude Include="DP_Graph_25953.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DFS_2169.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestData\Q25314\Output1.txt">

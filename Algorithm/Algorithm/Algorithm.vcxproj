@@ -147,6 +147,7 @@
     <ClInclude Include="DataStructure_Q1764.h" />
     <ClInclude Include="DataStructure_Q3190.h" />
     <ClInclude Include="Deque_28279.h" />
+    <ClInclude Include="DFS_2169.h" />
     <ClInclude Include="DFS_Q1987.h" />
     <ClInclude Include="Dijkstra_Q1916r.h" />
     <ClInclude Include="DP_Graph_25953.h" />
