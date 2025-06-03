@@ -138,6 +138,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="20149_TBD.h" />
     <ClInclude Include="BackTracking_DFS_Q1799(Queen).h" />
     <ClInclude Include="BFS_Q2468.h" />
     <ClInclude Include="BFS_Q4963.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="easy_24265.h" />
     <ClInclude Include="easy_24266.h" />
     <ClInclude Include="easy_24267.h" />
+    <ClInclude Include="Geometry_25308.h" />
     <ClInclude Include="Greedy_Q1339(단어 더하기).h" />
     <ClInclude Include="Greedy_Q14939(불끄기).h" />
     <ClInclude Include="Greedy_Q16496.h" />
@@ -182,6 +184,7 @@
     <ClInclude Include="Math_Q5073.h" />
     <ClInclude Include="Prime_17103(간단한 버전).h" />
     <ClInclude Include="Prime_4134(소수).h" />
+    <ClInclude Include="priority_queue_2075.h" />
     <ClInclude Include="Priority_queue_2696.h" />
     <ClInclude Include="Queue_24511.h" />
     <ClInclude Include="Sort_1269(set).h" />

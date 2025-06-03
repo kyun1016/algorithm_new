@@ -377,6 +377,15 @@
     <ClInclude Include="DFS_2169.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Geometry_25308.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="20149_TBD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="priority_queue_2075.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestData\Q25314\Output1.txt">

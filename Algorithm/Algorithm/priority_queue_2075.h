@@ -148,7 +148,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -215,7 +215,7 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 1644;
+constexpr int Q_NAME = 2075;
 
 class QSolve : public QBase
 {
@@ -280,7 +280,7 @@ int main()
 	QHelper::Init();
 
 #if defined(DEBUG) || defined(_DEBUG)
-	const int Q_COUNT = 4;
+	const int Q_COUNT = 1;
 	const std::string FILE_DIR = "./TestData/Q" + std::to_string(Q_NAME) + "/";
 	const std::string FULL_FILE_DIR = FILE_DIR + "Output" + std::to_string(Q_COUNT) + ".txt";
 	if (_access(FULL_FILE_DIR.c_str(), 0))

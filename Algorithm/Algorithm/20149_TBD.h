@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -215,7 +216,7 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 1644;
+constexpr int Q_NAME = 20149;
 
 class QSolve : public QBase
 {
@@ -236,26 +237,56 @@ private:
 	using ll = long long;
 	constexpr static int INF = -1000000007;
 
-	int _N;
-	std::priority_queue<ll> _pq;
-	std::priority_queue<ll> _pq_;
+	struct Point {
+		ll x;
+		ll y;
+	};
+
+	struct Line {
+		Point p1;
+		Point p2;
+		ll dy_dx;
+		ll a; // y = dy_dx*x + a
+	};
+
+
+
+	std::array<Line, 2> _arr;
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
 
-		cin >> _N;
-
-		for (int i = 0; i < _N; ++i)
-		{
-			for (int j = 0; j < _N; ++j)
-			{
-				ll x;
-				cin >> x;
-				_pq.emplace(-x);
-				if (_pq.size() > _N) _pq.pop();
-			}
+		for (auto& a : _arr) {
+			cin >> a.p1.x >> a.p1.y >> a.p2.x >> a.p2.y;
+			a.dy_dx = (a.p2.y - a.p1.y) / (a.p2.x - a.p1.x); // 증가량 계산
+			a.a = a.p1.y - a.dy_dx * a.p1.x; // y = dy_dx*x + a
 		}
+	}
+
+	// f(x) = -(a/c)*x + a (이때, a0, a1, a2이며, a1의 값은 (a1/root(2),a1/root(2)) 를 가짐)
+	bool discriminant(Point& o, bool& abnormal)
+	{
+		ll& a = _arr[0].dy_dx;
+		ll& b = _arr[0].a;
+		ll& c = _arr[1].dy_dx;
+		ll& d = _arr[1].a;
+
+		if (a == c) {
+			abnormal = true; // 두 직선이 일치
+			if (b == d) {
+				return true;
+			}
+			return false;
+		}
+
+		o.x = (d - b) / (a - c);
+		o.y = a * o.x + b;
+		if (o.x >= _arr[0].p1.x && o.x <= _arr[0].p2.x
+			|| o.x <= _arr[0].p1.x && o.x >= _arr[0].p2.x)
+			return true;
+
+		return false;
 	}
 
 
@@ -263,7 +294,19 @@ private:
 	{
 		Q_SOLUTION_BEGIN();
 
-		cout << -_pq.top() << std::endl;
+		Point ret;
+		bool abnormal = false;
+
+		if (discriminant(ret, abnormal))
+		{
+			cout << "1\n";
+			if (!abnormal) {
+				cout << ret.x << ' ' << ret.y << '\n';
+			}
+		}
+		else {
+			cout << "0\n";
+		}
 
 		Q_SOLUTION_END();
 	}
@@ -280,7 +323,7 @@ int main()
 	QHelper::Init();
 
 #if defined(DEBUG) || defined(_DEBUG)
-	const int Q_COUNT = 4;
+	const int Q_COUNT = 10;
 	const std::string FILE_DIR = "./TestData/Q" + std::to_string(Q_NAME) + "/";
 	const std::string FULL_FILE_DIR = FILE_DIR + "Output" + std::to_string(Q_COUNT) + ".txt";
 	if (_access(FULL_FILE_DIR.c_str(), 0))
