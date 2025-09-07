@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -148,7 +149,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -300,7 +301,7 @@ private:
 
 		BFS(_R);
 
-		for (uint i=1; i <= _N; ++i)
+		for (uint i = 1; i <= _N; ++i)
 			cout << _visited[i] << "\n";
 		Q_SOLUTION_END();
 	}

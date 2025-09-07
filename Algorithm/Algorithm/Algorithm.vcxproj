@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="20149_TBD.h" />
     <ClInclude Include="BackTracking_DFS_Q1799(Queen).h" />
+    <ClInclude Include="BFS_Q24444.h" />
     <ClInclude Include="BFS_Q2468.h" />
     <ClInclude Include="BFS_Q4963.h" />
     <ClInclude Include="BinarySearch_Q2143.h" />
@@ -149,7 +150,9 @@
     <ClInclude Include="DataStructure_Q3190.h" />
     <ClInclude Include="Deque_28279.h" />
     <ClInclude Include="DFS_2169.h" />
+    <ClInclude Include="DFS_Q24480.h" />
     <ClInclude Include="DFS_Q1987.h" />
+    <ClInclude Include="DFS_Q24479.h" />
     <ClInclude Include="Dijkstra_Q1916r.h" />
     <ClInclude Include="DP_Graph_25953.h" />
     <ClInclude Include="DP_Graph_2637.h" />

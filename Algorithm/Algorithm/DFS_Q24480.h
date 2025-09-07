@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -148,7 +149,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -215,7 +216,7 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 24444;
+constexpr int Q_NAME = 24480;
 constexpr int Q_COUNT = 1;
 
 class QSolve : public QBase
@@ -260,7 +261,7 @@ private:
 		}
 
 		for (uint i = 1; i <= _N; ++i)
-			std::sort(_nodes[i].begin(), _nodes[i].end(), std::less<uint>());
+			std::sort(_nodes[i].begin(), _nodes[i].end(), std::greater<uint>());
 	}
 
 
@@ -273,34 +274,13 @@ private:
 				DFS(n);
 		}
 	}
-
-	void BFS(int node)
-	{
-		std::queue<int> qu;
-		_visited[node] = ++_cnt;
-		qu.push(node);
-
-		while (!qu.empty())
-		{
-			int cur = qu.front();
-			qu.pop();
-			for (const auto& n : _nodes[cur])
-			{
-				if (_visited[n] == 0)
-				{
-					_visited[n] = ++_cnt;
-					qu.push(n);
-				}
-			}
-		}
-	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
 
-		BFS(_R);
+		DFS(_R);
 
-		for (uint i=1; i <= _N; ++i)
+		for (uint i = 1; i <= _N; ++i)
 			cout << _visited[i] << "\n";
 		Q_SOLUTION_END();
 	}

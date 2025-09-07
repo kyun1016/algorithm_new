@@ -374,9 +374,6 @@
     <ClInclude Include="DP_Graph_25953.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DFS_2169.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Geometry_25308.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -385,6 +382,18 @@
     </ClInclude>
     <ClInclude Include="priority_queue_2075.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DFS_Q24479.h">
+      <Filter>Header Files\DFS</Filter>
+    </ClInclude>
+    <ClInclude Include="DFS_2169.h">
+      <Filter>Header Files\DFS</Filter>
+    </ClInclude>
+    <ClInclude Include="DFS_Q24480.h">
+      <Filter>Header Files\DFS</Filter>
+    </ClInclude>
+    <ClInclude Include="BFS_Q24444.h">
+      <Filter>Header Files\BFS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
