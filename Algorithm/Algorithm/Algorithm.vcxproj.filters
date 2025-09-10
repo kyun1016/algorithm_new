@@ -88,6 +88,9 @@
     <Filter Include="Header Files\Recursion">
       <UniqueIdentifier>{d70e2994-559b-49cb-9a92-cdea390d99b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\TwoPointer">
+      <UniqueIdentifier>{ed5c021d-5933-45fe-9d24-150258f4b4ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -394,6 +397,15 @@
     </ClInclude>
     <ClInclude Include="BFS_Q24444.h">
       <Filter>Header Files\BFS</Filter>
+    </ClInclude>
+    <ClInclude Include="BFS_Q24445.h">
+      <Filter>Header Files\BFS</Filter>
+    </ClInclude>
+    <ClInclude Include="BFS_Q16928.h">
+      <Filter>Header Files\BFS</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoPointer_Q1644.h">
+      <Filter>Header Files\TwoPointer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

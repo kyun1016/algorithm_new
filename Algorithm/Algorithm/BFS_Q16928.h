@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -148,7 +149,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -171,6 +172,11 @@ class QBase
 {
 protected:
 	QBase() = default;
+	QBase(std::string num)
+		: _dir("./TestData/Q" + num + "/")
+	{
+
+	}
 	QBase(int num)
 		: _dir("./TestData/Q" + std::to_string(num) + "/")
 	{
@@ -210,7 +216,7 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 15647;
+constexpr int Q_NAME = 16928;
 constexpr int Q_COUNT = 1;
 
 class QSolve : public QBase
@@ -230,89 +236,95 @@ private:
 	using iter = std::list<std::int32_t>::iterator;
 	using ull = unsigned long long;
 	using ll = long long;
-	constexpr static int INF = 1000000007;
+	constexpr static int INF = -1000000007;
 
-    int _N;
-    std::vector<std::vector<std::pair<int, int>>> _adj; // {정점, 가중치}
-    std::vector<ll> _subtreeSum;    // 서브트리 거리 합
-    std::vector<int> _subtreeSize;  // 서브트리 크기
-    std::vector<ll> _answer;        // 최종 답
-
+	uint _N, _M;
+	std::unordered_map<uint, uint> _map;
+	std::vector<uint> _board;
 private:
-    virtual void Input()
-    {
-        Q_INPUT_BEGIN();
-        cin >> _N;
-        
-        _adj.resize(_N + 1);
-        _subtreeSum.resize(_N + 1);
-        _subtreeSize.resize(_N + 1);
-        _answer.resize(_N + 1);
-        
-        for (int i = 0; i < _N - 1; ++i) {
-            int u, v, d;
-            cin >> u >> v >> d;
-            _adj[u].push_back({v, d});
-            _adj[v].push_back({u, d});
-        }
-    }
+	virtual void Input()
+	{
+		Q_INPUT_BEGIN();
 
-    // 첫 번째 DFS: 1번을 루트로 하여 서브트리 정보 계산
-    void DFS1(int node, int parent) {
-        _subtreeSize[node] = 1;
-        _subtreeSum[node] = 0;
-        
-        for (auto& [child, weight] : _adj[node]) {
-            if (child != parent) {
-                DFS1(child, node);
-                _subtreeSize[node] += _subtreeSize[child];
-                _subtreeSum[node] += _subtreeSum[child] + (ll)_subtreeSize[child] * weight;
-            }
-        }
-    }
+		cin >> _N >> _M;
 
-    // 두 번째 DFS: 트리 재루팅으로 모든 노드의 답 계산
-    void DFS2(int node, int parent, ll parentContribution) {
-        _answer[node] = _subtreeSum[node] + parentContribution;
-        
-        for (auto& [child, weight] : _adj[node]) {
-            if (child != parent) {
-                // child를 루트로 했을 때의 부모 기여도
-                ll newParentContrib = parentContribution + 
-                    (_subtreeSum[node] - _subtreeSum[child] - (ll)_subtreeSize[child] * weight) +
-                    (ll)(_N - _subtreeSize[child]) * weight;
-                
-                DFS2(child, node, newParentContrib);
-            }
-        }
-    }
+		_board.resize(101, 0);
+		uint x, y;
+		for (uint i = 0; i < _N; ++i)
+		{
+			cin >> x >> y;
+			_map[x] = y;
+		}
+		for (uint i = 0; i < _M; ++i)
+		{
+			cin >> x >> y;
+			_map[x] = y;
+		}
+	}
 
-    virtual void Solution()
-    {
-        Q_SOLUTION_BEGIN();
 
-        DFS1(1, -1);        // 서브트리 정보 계산
-        DFS2(1, -1, 0);     // 재루팅으로 모든 답 계산
+	void push(std::queue<std::pair<uint, uint>>& queue, const uint& node, const uint& cnt)
+	{
+		for (uint i = 1; i <= 6; ++i)
+		{
+			if (node + i > 100) continue;
+			if (_board[node + i] == 0)
+			{
+				_board[node + i] = cnt;
+				if (_map.find(node + i) != _map.end())
+				{
+					uint next = _map[node + i];
+					if (_board[next] == 0)
+					{
+						_board[next] = cnt;
+						queue.push({ next, cnt });
+					}
+				}
+				else
+				{
+					queue.push({ node + i, cnt });
+				}
+			}
+		}
+	}
+	void BFS()
+	{
+		std::queue<std::pair<uint, uint>> q;
+		// uint cnt = 1;
+		q.push({ 1, 0 });
+		// push(q, 0, cnt);
 
-        for (int i = 1; i <= _N; ++i) {
-            cout << _answer[i] << '\n';
-        }
+		while (!q.empty())
+		{
+			auto [node, c] = q.front();
+			if (node == 100)
+			{
+				std::cout << c << "\n";
+				return;
+			}
+			q.pop();
+			push(q, node, c + 1);
+		}
+	}
+	virtual void Solution()
+	{
+		Q_SOLUTION_BEGIN();
 
-        Q_SOLUTION_END();
-    }
+		BFS();
 
-    virtual void Delete() {
-        _adj.clear();
-        _subtreeSum.clear();
-        _subtreeSize.clear();
-        _answer.clear();
-    }
+		Q_SOLUTION_END();
+	}
+
+	virtual void Delete() {
+		_board.clear();
+		_map.clear();
+	}
 };
 
 /*--------------------
 * main
 --------------------*/
-int main() 
+int main()
 {
 	QHelper::Init();
 

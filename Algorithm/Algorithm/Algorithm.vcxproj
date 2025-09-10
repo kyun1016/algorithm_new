@@ -140,7 +140,9 @@
   <ItemGroup>
     <ClInclude Include="20149_TBD.h" />
     <ClInclude Include="BackTracking_DFS_Q1799(Queen).h" />
+    <ClInclude Include="BFS_Q16928.h" />
     <ClInclude Include="BFS_Q24444.h" />
+    <ClInclude Include="BFS_Q24445.h" />
     <ClInclude Include="BFS_Q2468.h" />
     <ClInclude Include="BFS_Q4963.h" />
     <ClInclude Include="BinarySearch_Q2143.h" />
@@ -232,6 +234,7 @@
     <ClInclude Include="BackTracking_DFS_Q15686.h" />
     <ClInclude Include="Trie_Q5670.h" />
     <ClInclude Include="BackTracking_DFS_Q6603.h" />
+    <ClInclude Include="TwoPointer_Q1644.h" />
     <ClInclude Include="UM_Q20920(사전 정렬).h" />
     <ClInclude Include="UM_Q25192.h" />
   </ItemGroup>
