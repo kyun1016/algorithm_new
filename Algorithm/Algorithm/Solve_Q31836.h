@@ -1,4 +1,5 @@
-﻿#pragma once
+#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -148,7 +149,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -210,7 +211,7 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 13018;
+constexpr int Q_NAME = 31836;
 constexpr int Q_COUNT = 1;
 
 class QSolve : public QBase
@@ -232,59 +233,58 @@ private:
 	using ll = long long;
 	constexpr static int INF = 1000000007;
 
-    int _N;
-	std::vector<std::pair<int, int>> _node;
+	int _N;
 private:
-    virtual void Input()
-    {
-        Q_INPUT_BEGIN();
-        cin >> _N;
-		_node.resize(_N-1);
-		for (auto& n : _node)
-			cin >> n.first >> n.second;
-    }
+	virtual void Input()
+	{
+		Q_INPUT_BEGIN();
+		cin >> _N;
+	}
 
-    virtual void Solution()
-    {
-        Q_SOLUTION_BEGIN();
+	virtual void Solution()
+	{
+		Q_SOLUTION_BEGIN();
 
-		if (_k == _n) {
-			cout << "Impossible" << '\n';
+		const int div = _N / 3;
+		if (_N % 3 == 0) {
+			cout << div << '\n';
+			for (int i = 0; i < div; ++i)
+				cout << i * 3 + 3 << ' ';
+			cout << '\n' << div * 2 << '\n';
+			for (int i = 0; i < div; ++i)
+				cout << i * 3 + 1 << ' ' << i * 3 + 2 << ' ';
+			cout << '\n';
+		}
+		else if (_N % 3 == 1) {
+			cout << div << "\n";
+			for (int i = 0; i < div; ++i)
+				cout << i * 3 + 4 << ' ';
+			cout << '\n' << div * 2 << "\n";
+			for (int i = 0; i < div; ++i)
+				cout << i * 3 + 2 << ' ' << i * 3 + 3 << ' ';
+			cout << '\n';
 		}
 		else {
-			std::vector<int> arr(_n);
-			for (int i = 0; i < _n; ++i)
-				arr[i] = i + 1;
-
-			int current_gcd_count = _n - 1;
-			int need_to_reduce = current_gcd_count - _k;
-
-			for (int i = 1; i < _n - 1; i += 2)
-			{
-				if (need_to_reduce >= 2) {
-					std::swap(arr[i], arr[i + 1]);
-					need_to_reduce -= 2;
-				}
-			}
-
-			if (need_to_reduce)
-				std::swap(arr[0], arr[_n - 1]);
-
-			for (const auto& v : arr)
-				cout << v << ' ';
+			cout << div + 1 << "\n1 ";
+			for (int i = 0; i < div; ++i)
+				cout << i * 3 + 5 << ' ';
+			cout << '\n' << div * 2 + 1 << "\n2 ";
+			for (int i = 0; i < div; ++i)
+				cout << i * 3 + 3 << ' ' << i * 3 + 4 << ' ';
+			cout << '\n';
 		}
-		
-        Q_SOLUTION_END();
-    }
 
-    virtual void Delete() {
-    }
+		Q_SOLUTION_END();
+	}
+
+	virtual void Delete() {
+	}
 };
 
 /*--------------------
 * main
 --------------------*/
-int main() 
+int main()
 {
 	QHelper::Init();
 

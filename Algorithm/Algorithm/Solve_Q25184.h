@@ -1,4 +1,5 @@
-﻿#pragma once
+#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -148,7 +149,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -210,8 +211,8 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 13018;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 25184;
+constexpr int Q_COUNT = 2;
 
 class QSolve : public QBase
 {
@@ -232,59 +233,38 @@ private:
 	using ll = long long;
 	constexpr static int INF = 1000000007;
 
-    int _N;
-	std::vector<std::pair<int, int>> _node;
+	int _N;
 private:
-    virtual void Input()
-    {
-        Q_INPUT_BEGIN();
-        cin >> _N;
-		_node.resize(_N-1);
-		for (auto& n : _node)
-			cin >> n.first >> n.second;
-    }
+	virtual void Input()
+	{
+		Q_INPUT_BEGIN();
+		cin >> _N;
+	}
 
-    virtual void Solution()
-    {
-        Q_SOLUTION_BEGIN();
+	virtual void Solution()
+	{
+		Q_SOLUTION_BEGIN();
+		int diff = _N / 2;
 
-		if (_k == _n) {
-			cout << "Impossible" << '\n';
+		for (int i = 0; i < diff; ++i)
+		{
+			cout
+				<< i + 1 + diff << ' '
+				<< i + 1 << ' ';
 		}
-		else {
-			std::vector<int> arr(_n);
-			for (int i = 0; i < _n; ++i)
-				arr[i] = i + 1;
+		if (_N % 2)
+			cout << _N << '\n';
+		Q_SOLUTION_END();
+	}
 
-			int current_gcd_count = _n - 1;
-			int need_to_reduce = current_gcd_count - _k;
-
-			for (int i = 1; i < _n - 1; i += 2)
-			{
-				if (need_to_reduce >= 2) {
-					std::swap(arr[i], arr[i + 1]);
-					need_to_reduce -= 2;
-				}
-			}
-
-			if (need_to_reduce)
-				std::swap(arr[0], arr[_n - 1]);
-
-			for (const auto& v : arr)
-				cout << v << ' ';
-		}
-		
-        Q_SOLUTION_END();
-    }
-
-    virtual void Delete() {
-    }
+	virtual void Delete() {
+	}
 };
 
 /*--------------------
 * main
 --------------------*/
-int main() 
+int main()
 {
 	QHelper::Init();
 

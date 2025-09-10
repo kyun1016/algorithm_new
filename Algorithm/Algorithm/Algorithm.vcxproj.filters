@@ -91,6 +91,9 @@
     <Filter Include="Header Files\TwoPointer">
       <UniqueIdentifier>{ed5c021d-5933-45fe-9d24-150258f4b4ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Solve">
+      <UniqueIdentifier>{75bbb2d2-b8ab-427a-bea8-4ba320e073cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -406,6 +409,27 @@
     </ClInclude>
     <ClInclude Include="TwoPointer_Q1644.h">
       <Filter>Header Files\TwoPointer</Filter>
+    </ClInclude>
+    <ClInclude Include="DSP_Tree_Q15647.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Solve_Q30618.h">
+      <Filter>Header Files\Solve</Filter>
+    </ClInclude>
+    <ClInclude Include="Solve_Q13018.h">
+      <Filter>Header Files\Solve</Filter>
+    </ClInclude>
+    <ClInclude Include="Solve_Q25184.h">
+      <Filter>Header Files\Solve</Filter>
+    </ClInclude>
+    <ClInclude Include="Solve_Q25288.h">
+      <Filter>Header Files\Solve</Filter>
+    </ClInclude>
+    <ClInclude Include="Solve_Q28065.h">
+      <Filter>Header Files\Solve</Filter>
+    </ClInclude>
+    <ClInclude Include="Solve_Q31836.h">
+      <Filter>Header Files\Solve</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

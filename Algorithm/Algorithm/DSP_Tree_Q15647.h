@@ -1,4 +1,4 @@
-癤�#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -148,7 +148,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -210,7 +210,7 @@ protected:
 #define OUT
 #define IN
 
-constexpr int Q_NAME = 13018;
+constexpr int Q_NAME = 15647;
 constexpr int Q_COUNT = 1;
 
 class QSolve : public QBase
@@ -232,59 +232,87 @@ private:
 	using ll = long long;
 	constexpr static int INF = 1000000007;
 
-    int _N;
-	std::vector<std::pair<int, int>> _node;
+	int _N;
+	std::vector<std::vector<std::pair<int, int>>> _adj; // {정점, 가중치}
+	std::vector<ll> _subtreeSum;    // 서브트리 거리 합
+	std::vector<int> _subtreeSize;  // 서브트리 크기
+	std::vector<ll> _answer;        // 최종 답
+
 private:
-    virtual void Input()
-    {
-        Q_INPUT_BEGIN();
-        cin >> _N;
-		_node.resize(_N-1);
-		for (auto& n : _node)
-			cin >> n.first >> n.second;
-    }
+	virtual void Input()
+	{
+		Q_INPUT_BEGIN();
+		cin >> _N;
 
-    virtual void Solution()
-    {
-        Q_SOLUTION_BEGIN();
+		_adj.resize(_N + 1);
+		_subtreeSum.resize(_N + 1);
+		_subtreeSize.resize(_N + 1);
+		_answer.resize(_N + 1);
 
-		if (_k == _n) {
-			cout << "Impossible" << '\n';
+		for (int i = 0; i < _N - 1; ++i) {
+			int u, v, d;
+			cin >> u >> v >> d;
+			_adj[u].push_back({ v, d });
+			_adj[v].push_back({ u, d });
 		}
-		else {
-			std::vector<int> arr(_n);
-			for (int i = 0; i < _n; ++i)
-				arr[i] = i + 1;
+	}
 
-			int current_gcd_count = _n - 1;
-			int need_to_reduce = current_gcd_count - _k;
+	// 첫 번째 DFS: 1번을 루트로 하여 서브트리 정보 계산
+	void DFS1(int node, int parent) {
+		_subtreeSize[node] = 1;
+		_subtreeSum[node] = 0;
 
-			for (int i = 1; i < _n - 1; i += 2)
-			{
-				if (need_to_reduce >= 2) {
-					std::swap(arr[i], arr[i + 1]);
-					need_to_reduce -= 2;
-				}
+		for (auto& [child, weight] : _adj[node]) {
+			if (child != parent) {
+				DFS1(child, node);
+				_subtreeSize[node] += _subtreeSize[child];
+				_subtreeSum[node] += _subtreeSum[child] + (ll)_subtreeSize[child] * weight;
 			}
-
-			if (need_to_reduce)
-				std::swap(arr[0], arr[_n - 1]);
-
-			for (const auto& v : arr)
-				cout << v << ' ';
 		}
-		
-        Q_SOLUTION_END();
-    }
+	}
 
-    virtual void Delete() {
-    }
+	// 두 번째 DFS: 트리 재루팅으로 모든 노드의 답 계산
+	void DFS2(int node, int parent, ll parentContribution) {
+		_answer[node] = _subtreeSum[node] + parentContribution;
+
+		for (auto& [child, weight] : _adj[node]) {
+			if (child != parent) {
+				// child를 루트로 했을 때의 부모 기여도
+				ll newParentContrib = parentContribution +
+					(_subtreeSum[node] - _subtreeSum[child] - (ll)_subtreeSize[child] * weight) +
+					(ll)(_N - _subtreeSize[child]) * weight;
+
+				DFS2(child, node, newParentContrib);
+			}
+		}
+	}
+
+	virtual void Solution()
+	{
+		Q_SOLUTION_BEGIN();
+
+		DFS1(1, -1);        // 서브트리 정보 계산
+		DFS2(1, -1, 0);     // 재루팅으로 모든 답 계산
+
+		for (int i = 1; i <= _N; ++i) {
+			cout << _answer[i] << '\n';
+		}
+
+		Q_SOLUTION_END();
+	}
+
+	virtual void Delete() {
+		_adj.clear();
+		_subtreeSum.clear();
+		_subtreeSize.clear();
+		_answer.clear();
+	}
 };
 
 /*--------------------
 * main
 --------------------*/
-int main() 
+int main()
 {
 	QHelper::Init();
 

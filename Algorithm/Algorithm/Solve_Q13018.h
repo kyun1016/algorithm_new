@@ -1,4 +1,5 @@
-﻿#pragma once
+#pragma once
+#pragma once
 #include <cstdio>
 #include <cassert>
 #include <cstring>
@@ -148,7 +149,7 @@ public:
 			getline(ifp2, line2);
 			if (line2.empty())
 			{
-				std::cout << "*Error, [" << i++ << " Line] Test"<< testCase <<" Fail - Type 1\n";
+				std::cout << "*Error, [" << i++ << " Line] Test" << testCase << " Fail - Type 1\n";
 				break;
 			}
 
@@ -232,21 +233,17 @@ private:
 	using ll = long long;
 	constexpr static int INF = 1000000007;
 
-    int _N;
-	std::vector<std::pair<int, int>> _node;
+	int _n, _k;
 private:
-    virtual void Input()
-    {
-        Q_INPUT_BEGIN();
-        cin >> _N;
-		_node.resize(_N-1);
-		for (auto& n : _node)
-			cin >> n.first >> n.second;
-    }
+	virtual void Input()
+	{
+		Q_INPUT_BEGIN();
+		cin >> _n >> _k;
+	}
 
-    virtual void Solution()
-    {
-        Q_SOLUTION_BEGIN();
+	virtual void Solution()
+	{
+		Q_SOLUTION_BEGIN();
 
 		if (_k == _n) {
 			cout << "Impossible" << '\n';
@@ -273,18 +270,18 @@ private:
 			for (const auto& v : arr)
 				cout << v << ' ';
 		}
-		
-        Q_SOLUTION_END();
-    }
 
-    virtual void Delete() {
-    }
+		Q_SOLUTION_END();
+	}
+
+	virtual void Delete() {
+	}
 };
 
 /*--------------------
 * main
 --------------------*/
-int main() 
+int main()
 {
 	QHelper::Init();
 
