@@ -30,6 +30,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,11 +210,8 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 17299;
+constexpr int Q_COUNT = 2;
 
 class QSolve : public QBase
 {
@@ -231,29 +230,60 @@ private:
 	using iter = std::list<std::int32_t>::iterator;
 	using ull = unsigned long long;
 	using ll = long long;
-	constexpr static int INF = 1000000007;
 
-	int _N;
-	std::string _text;
+	int N, D;
+	std::vector<ll> stones;
+	std::vector<ll> dp;
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
-		cin >> _N;
-		cin >> _text;
+
+		cin >> N >> D;
+		stones.resize(N);
+		dp.resize(N);
+
+		for (auto& n : stones)
+			cin >> n;
 	}
 
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
+
+		// 덱을 사용한 슬라이딩 윈도우 최대값
+		std::deque<std::pair<ll, int>> dq; // {dp값, 인덱스}
+
+		// 뒤에서부터 DP 계산
+		for (int i = N - 1; i >= 0; --i) {
+			// 윈도우 범위를 벗어난 원소들 제거
+			while (!dq.empty() && dq.front().second > i + D) {
+				dq.pop_front();
+			}
+
+			// 현재 징검다리에서 바로 나오는 경우
+			dp[i] = stones[i];
+
+			// 다음 징검다리로 이동하는 것이 더 유리한 경우
+			if (!dq.empty() && dq.front().first > 0) {
+				dp[i] = std::max(dp[i], stones[i] + dq.front().first);
+			}
+
+			// 현재 dp[i]를 덱에 추가 (단조 감소 유지)
+			while (!dq.empty() && dq.back().first <= dp[i]) {
+				dq.pop_back();
+			}
+			dq.push_back({ dp[i], i });
 		}
+
+		ll result = *std::max_element(dp.begin(), dp.end());
+		cout << result;
+
 		Q_SOLUTION_END();
 	}
 
 	virtual void Delete() {
+
 	}
 };
 

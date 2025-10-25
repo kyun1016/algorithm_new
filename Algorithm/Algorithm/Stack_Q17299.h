@@ -30,6 +30,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,11 +210,8 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 17299;
+constexpr int Q_COUNT = 2;
 
 class QSolve : public QBase
 {
@@ -234,22 +233,42 @@ private:
 	constexpr static int INF = 1000000007;
 
 	int _N;
-	std::string _text;
+	std::vector<int> sequence;
+	std::vector<int> result;
+	std::unordered_map<int, int> frequency;
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
 		cin >> _N;
-		cin >> _text;
+		frequency.clear();
+		sequence.resize(_N);
+		result.resize(_N, -1);
+		for (auto& a : sequence) {
+			cin >> a;
+			++frequency[a];
+		}
 	}
 
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
+
+		std::stack<int> st;
+		for (int i = _N - 1; i >= 0; --i) {
+			while (!st.empty() && frequency[sequence[st.top()]] <= frequency[sequence[i]]) {
+				st.pop();
+			}
+			if (!st.empty())
+				result[i] = sequence[st.top()];
+
+			st.push(i);
 		}
+
+		for (const auto& n : result) {
+			cout << n << " ";
+		}
+
 		Q_SOLUTION_END();
 	}
 

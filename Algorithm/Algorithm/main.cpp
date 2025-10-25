@@ -14,6 +14,7 @@
 #include <limits>
 #include <vector>
 #include <climits>
+#include <deque>
 
 #include <numeric>
 #include <sstream>
@@ -29,6 +30,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -207,10 +210,7 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 22967;
+constexpr int Q_NAME = 14908;
 constexpr int Q_COUNT = 1;
 
 class QSolve : public QBase
@@ -225,138 +225,30 @@ public: // Singleton
 		return gQBase;
 	}
 private:
-	using uint = std::uint32_t;
-	using integer = std::int32_t;
-	using iter = std::list<std::int32_t>::iterator;
-	using ull = unsigned long long;
-	using ll = long long;
-	constexpr static int INF = 1000000007;
-
-    int _N;
-	std::vector<std::pair<int, int>> _node;
-	std::vector<int> _cnt;
+	int T;
+	std::vector<std::pair<int, int>> arr;
 private:
     virtual void Input()
     {
         Q_INPUT_BEGIN();
-        cin >> _N;
-		_node.resize(_N-1);
-		_cnt.resize(_N, 0);
-		for (auto& n : _node) {
-			cin >> n.first >> n.second;
-			++_cnt[n.first];
-			++_cnt[n.second];
-		}
-    }
+
+	}
 
     virtual void Solution()
     {
         Q_SOLUTION_BEGIN();
 
-		// 1. 추가로 건설해야하는 구름다리 개수 K
-		// 2. 건설 이후 학교의 지름
-		// 3. K개를 활용해 배치한 구름다리의 
+		string a;
+		a = 1;
+		a = a + to_string(1);
+		cout << a;
 
-		// 1) 2개
-		if (_N == 2)
-		{
-			cout << "0\n1\n";
-		}
-		else if (_N == 3)
-		{
-			cout << "1\n1\n";
-			std::pair<int, int> target[3] =
-			{
-				{1,2}, {1,3},
-				{2,3},
-			};
-			bool flag[3] = { false, false, false };
-
-			for (const auto& n : _node)
-			{
-				for (int i=0; i<3; ++i)
-				{
-					const auto& t = target[i];
-					if ((n.first == t.first && n.second == t.second)
-						|| (n.second == t.first && n.first == t.second))
-					{
-						flag[i] = true;
-					}
-				}
-			}
-
-			for (int i = 0; i < 3; ++i)
-			{
-				if (!flag[i])
-					cout << target[i].first << ' ' << target[i].second << '\n';
-			}
-		}
-		else if (_N == 4)
-		{
-			cout << "3\n1\n";
-			
-			std::pair<int, int> target[6] =
-			{
-				{1,2}, {1,3}, {1,4},
-				{2,3}, {2,4},
-				{3,4}
-			};
-			bool flag[6] = { false, false, false, false, false, false };
-
-			for (const auto& n : _node)
-			{
-				for (int i = 0; i < 6; ++i)
-				{
-					const auto& t = target[i];
-					if ((n.first == t.first && n.second == t.second)
-						|| (n.second == t.first && n.first == t.second))
-					{
-						flag[i] = true;
-					}
-				}
-			}
-
-			for (int i = 0; i < 6; ++i)
-			{
-				if (!flag[i])
-					cout << target[i].first << ' ' << target[i].second << '\n';
-			}
-		}
-		else {
-			int rootNode = 0;
-			for (int i=1; i< _cnt.size(); ++i)
-			{
-				if (_cnt[i] > _cnt[rootNode])
-					rootNode = i;
-			}
-
-			cout << _N - 1 - _cnt[rootNode] << "\n2\n";
-
-
-			std::vector<bool> targetNode(_N+1, false);
-			for (const auto& n : _node)
-			{
-				if (n.first == rootNode || n.second == rootNode)
-				{
-					targetNode[n.first] = true;
-					targetNode[n.second] = true;
-				}
-			}
-
-			for (int i = 1; i < targetNode.size(); ++i)
-			{
-				if (!targetNode[i])
-					cout << i << ' ' << rootNode << '\n';
-			}
-		}
-		
         Q_SOLUTION_END();
     }
-
     virtual void Delete() {
+
     }
 };
-
 /*--------------------
 * main
 --------------------*/

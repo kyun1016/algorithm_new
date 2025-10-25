@@ -133,15 +133,21 @@
   <ItemGroup>
     <ClCompile Include="Ad-hoc_Q10158.h" />
     <ClCompile Include="Ad-hoc_Q1034.h" />
+    <ClInclude Include="DP_Q14601.h" />
     <ClInclude Include="DSP_Tree_Q15647.h" />
     <ClCompile Include="Trie_Q5052.h" />
     <ClCompile Include="QBase.h" />
     <ClCompile Include="main.cpp" />
+    <ClInclude Include="Geometry_Q20149(선분교차3).h" />
+    <ClInclude Include="PriorityQueue_Q15678.h" />
+    <ClInclude Include="SegmentTree_Q15678.h" />
     <ClInclude Include="Solve_Q13018.h" />
     <ClInclude Include="Solve_Q25184.h" />
     <ClInclude Include="Solve_Q25288.h" />
     <ClInclude Include="Solve_Q28065.h" />
     <ClInclude Include="Solve_Q30618.h" />
+    <ClInclude Include="기하_Q1069.h" />
+    <ClInclude Include="기하_Q7869.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="20149_TBD.h" />
@@ -199,10 +205,12 @@
     <ClInclude Include="Priority_queue_2696.h" />
     <ClInclude Include="Queue_24511.h" />
     <ClInclude Include="Solve_Q31836.h" />
+    <ClInclude Include="solve_Qxxxxx.h" />
     <ClInclude Include="Sort_1269(set).h" />
     <ClInclude Include="Sort_Q7785(Set 활용).h" />
     <ClInclude Include="Sort_Q7785(unordered_map).h" />
     <ClInclude Include="Stack_12789.h" />
+    <ClInclude Include="Stack_Q17299.h" />
     <ClInclude Include="Stack_Q28278.h" />
     <ClInclude Include="Imp_Q10810.h" />
     <ClInclude Include="Imp_Q10813.h" />
@@ -229,6 +237,8 @@
     <ClInclude Include="Recursion_Q4779.h" />
     <ClInclude Include="Set_Q25192.h" />
     <ClInclude Include="Set_Q26069.h" />
+    <ClInclude Include="Stack_Q33918.h" />
+    <ClInclude Include="String_Q1165.h" />
     <ClInclude Include="String_Q12904.h" />
     <ClInclude Include="String_Q25206.h" />
     <ClInclude Include="String_Q27866.h" />

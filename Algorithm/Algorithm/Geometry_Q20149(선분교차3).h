@@ -15,6 +15,7 @@
 #include <limits>
 #include <vector>
 #include <climits>
+#include <deque>
 
 #include <numeric>
 #include <sstream>
@@ -30,6 +31,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,11 +211,9 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 20149;
+constexpr int Q_COUNT = 10
+;
 
 class QSolve : public QBase
 {
@@ -231,29 +232,159 @@ private:
 	using iter = std::list<std::int32_t>::iterator;
 	using ull = unsigned long long;
 	using ll = long long;
-	constexpr static int INF = 1000000007;
 
-	int _N;
-	std::string _text;
+	template<typename T = int>
+	struct Point {
+		T x, y;
+		Point() : x(0), y(0) {}
+		Point(T x, T y) : x(x), y(y) {}
+
+		Point<T> operator+(const Point<T>& rhs) const {
+			return Point(x + rhs.x, y + rhs.y);
+		}
+		Point<T> operator-(const Point<T>& rhs) const {
+			return Point(x - rhs.x, y - rhs.y);
+		}
+		T dot(const Point<T>& rhs) const {
+			return x * rhs.x + y * rhs.y;
+		}
+		T cross(const Point<T>& rhs) const {
+			return x * rhs.y - y * rhs.x;
+		}
+	};
+
+	enum class CCWResult : int {
+		COUNTERCLOCKWISE = -1,
+		CLOCKWISE = 1,
+		COLINEAR = 0,
+	};
+	enum class LineRelation : uint8_t {
+		PARALLEL = 0,
+		INTERSECTING = 1,
+		COINCIDENT = 2,
+	};
+	// CCW 함수: p1, p2, p3의 방향을 판단
+	template<typename T = int>
+	static inline int CCW(const Point<T>& p1, const Point<T>& p2, const Point<T>& p3) {
+		Point<T> v1 = p2 - p1;
+		Point<T> v2 = p3 - p1;
+		auto cross = v1.cross(v2);
+		if (cross > 0) return 1;    // 반시계 방향
+		if (cross < 0) return -1;   // 시계 방향
+		return 0;                   // 일직선상
+	}
+
+	template<typename T = int>
+	struct Line {
+		Point<T> p1, p2;
+
+		Line() = default;
+		Line(const Point<T>& p1, const Point<T>& p2) : p1(p1), p2(p2) {}
+		Line(T x1, T y1, T x2, T y2) : p1(x1, y1), p2(x2, y2) {}
+
+		Point<T> direction() const {
+			return p2 - p1;
+		}
+		double slope() const {
+			auto dir = direction();
+			if (dir.x == 0) return INFINITY;
+			return static_cast<double>(dir.y) / dir.x;
+		}
+
+		bool contains(const Point<T>& p) const {
+			// 세 점이 일직선상에 있고, p가 선분 범위 내에 있는지 확인
+			auto v1 = p - p1;
+			auto v2 = p2 - p1;
+
+			// 외적이 0이면 일직선상
+			if (v1.cross(v2) != 0) return false;
+
+			// 내적으로 범위 확인
+			auto dot = v1.dot(v2);
+			return dot >= 0 && dot <= v2.dot(v2);
+		}
+		// 두 선분의 교점 (CCW 알고리즘 사용)
+		bool intersects(const Line<T>& other) const {
+			int ccw1 = CCW<T>(p1, p2, other.p1);
+			int ccw2 = CCW<T>(p1, p2, other.p2);
+			int ccw3 = CCW<T>(other.p1, other.p2, p1);
+			int ccw4 = CCW<T>(other.p1, other.p2, p2);
+
+			// 일반적인 교차 조건
+			if (ccw1 * ccw2 < 0 && ccw3 * ccw4 < 0) return true;
+
+			// 한 점이 다른 선분 위에 있는 경우
+			if (ccw1 == 0 && contains(other.p1)) return true;
+			if (ccw2 == 0 && contains(other.p2)) return true;
+			if (ccw3 == 0 && other.contains(p1)) return true;
+			if (ccw4 == 0 && other.contains(p2)) return true;
+
+			return false;
+		}
+		LineRelation getIntersection(Point<double>& ret, const Line<T>& other) const {
+			// 선분이 교차하지 않으면 예외 처리
+			if (!intersects(other)) {
+				return LineRelation::PARALLEL;
+			}
+
+			// 선분 방정식: p1 + t * (p2 - p1)
+			auto d1 = direction();
+			auto d2 = other.direction();
+
+			// 두 선분의 교차점 계산
+			T denom = d1.cross(d2);
+			if (denom == 0) {
+				return LineRelation::COINCIDENT; // 평행하거나 일치
+			}
+
+			double t = static_cast<double>((other.p1 - p1).cross(d2)) / denom;
+			ret = Point<double>(p1.x + t * d1.x, p1.y + t * d1.y);
+			return LineRelation::INTERSECTING;
+		}
+	};
+
+	// 타입 별칭
+	using PointI = Point<int>;
+	using PointF = Point<float>;
+	using PointD = Point<double>;
+	using LineI = Line<int>;
+	using LineF = Line<float>;
+	using LineD = Line<double>;
+	using PointLL = Point<ll>;
+	using LineLL = Line<ll>;
+
+	LineLL L1, L2;  // 선분 두 개
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
-		cin >> _N;
-		cin >> _text;
+
+		cin >> L1.p1.x >> L1.p1.y >> L1.p2.x >> L1.p2.y;
+		cin >> L2.p1.x >> L2.p1.y >> L2.p2.x >> L2.p2.y;
 	}
 
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
+
+		if (L1.intersects(L2)) {
+			cout << "1\n";
+
+			// 교점 계산 및 출력
+			Point<double> intersection;
+			if (L1.getIntersection(intersection, L2) == LineRelation::INTERSECTING) {
+				cout << std::fixed << std::setprecision(9);
+				cout << intersection.x << " " << intersection.y << '\n';
+			}
 		}
+		else {
+			cout << "0\n";
+		}
+
 		Q_SOLUTION_END();
 	}
-
 	virtual void Delete() {
+
 	}
 };
 

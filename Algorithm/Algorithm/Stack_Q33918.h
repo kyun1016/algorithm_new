@@ -15,6 +15,7 @@
 #include <limits>
 #include <vector>
 #include <climits>
+#include <deque>
 
 #include <numeric>
 #include <sstream>
@@ -30,6 +31,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,11 +211,8 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 33918;
+constexpr int Q_COUNT = 2;
 
 class QSolve : public QBase
 {
@@ -231,29 +231,62 @@ private:
 	using iter = std::list<std::int32_t>::iterator;
 	using ull = unsigned long long;
 	using ll = long long;
-	constexpr static int INF = 1000000007;
 
-	int _N;
-	std::string _text;
+	int N, M, C, D;
+	std::vector<int> optimal;
+
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
-		cin >> _N;
-		cin >> _text;
+
+		cin >> N >> M >> C >> D;
+		optimal.resize(N);
+
+		for (auto& n : optimal)
+			cin >> n;
 	}
 
+	inline int Score(int index, int temperature) {
+		return M - abs(optimal[index] - temperature);
+	}
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
+
+		// DP 상태: dp[온도] = 해당 온도에서의 최대 점수
+		std::vector<int> prev(M + 1, 0);
+		std::vector<int> next(M + 1, 0);
+		std::deque<std::pair<int, int>> dq;
+		for (int t = 0; t < N; ++t) {
+			for (int mod = 1; mod <= C; ++mod) {
+				dq.clear();
+				for (int k = mod; k <= std::min(M, mod + D); k += C)
+				{
+					while (!dq.empty() && dq.back().first <= prev[k]) dq.pop_back();
+					dq.push_back({ prev[k], k });
+				}
+				next[mod] = dq.front().first + Score(t, mod);
+				for (int k = mod + C; k <= M; k += C)
+				{
+					if (k + D <= M)
+					{
+						while (!dq.empty() && dq.back().first <= prev[k + D]) dq.pop_back();
+						dq.push_back({ prev[k + D], k + D });
+					}
+					if (dq.front().second == k - C - D) dq.pop_front();
+					next[k] = dq.front().first + Score(t, k);
+				}
+			}
+			// std::swap(prev, next);
+			prev.swap(next);
 		}
+
+		cout << *max_element(prev.begin() + 1, prev.end());
 		Q_SOLUTION_END();
 	}
-
 	virtual void Delete() {
+
 	}
 };
 

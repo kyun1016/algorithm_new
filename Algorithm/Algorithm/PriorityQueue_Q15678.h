@@ -30,6 +30,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,11 +210,8 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 15678;
+constexpr int Q_COUNT = 2;
 
 class QSolve : public QBase
 {
@@ -231,29 +230,47 @@ private:
 	using iter = std::list<std::int32_t>::iterator;
 	using ull = unsigned long long;
 	using ll = long long;
-	constexpr static int INF = 1000000007;
 
-	int _N;
-	std::string _text;
+	int N, D;
+	std::vector<ll> stones;
+
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
-		cin >> _N;
-		cin >> _text;
+
+		cin >> N >> D;
+		stones.resize(N);
+
+		for (auto& n : stones)
+			cin >> n;
 	}
 
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
+
+		// 우선순위 큐를 사용한 최적화 (최대힙)
+		std::priority_queue<std::pair<ll, int>> pq; // {dp값, 인덱스}
+		std::vector<ll> dp(N);
+
+		for (int i = N - 1; i >= 0; --i) {
+			while (!pq.empty() && pq.top().second > i + D)
+				pq.pop();
+
+			dp[i] = stones[i];
+			if (!pq.empty() && pq.top().first > 0)
+				dp[i] += pq.top().first;
+			pq.push({ dp[i], i });
 		}
+
+		cout << *std::max_element(dp.begin(), dp.end());
+
 		Q_SOLUTION_END();
 	}
 
 	virtual void Delete() {
+
 	}
 };
 

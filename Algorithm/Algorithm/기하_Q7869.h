@@ -15,6 +15,7 @@
 #include <limits>
 #include <vector>
 #include <climits>
+#include <deque>
 
 #include <numeric>
 #include <sstream>
@@ -30,6 +31,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,10 +211,7 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
+constexpr int Q_NAME = 7869;
 constexpr int Q_COUNT = 1;
 
 class QSolve : public QBase
@@ -226,37 +226,59 @@ public: // Singleton
 		return gQBase;
 	}
 private:
-	using uint = std::uint32_t;
-	using integer = std::int32_t;
-	using iter = std::list<std::int32_t>::iterator;
-	using ull = unsigned long long;
-	using ll = long long;
-	constexpr static int INF = 1000000007;
+	struct Point {
+		double x;
+		double y;
+	};
+	struct Circle {
+		Point c;
+		double r;
+	} c1, c2;
 
-	int _N;
-	std::string _text;
+	// 현의 넓이 계산
+	double getChordArea(double r, double d) {
+		if (d >= r) return 0.0;
+
+		// 중심 각
+		double theta = 2.0 * acos(d / r);
+
+		// 부채꼴 넓이 - 삼각형 넓이
+		double sectorArea = 0.5 * r * r * theta;
+		double triangleArea = 0.5 * r * r * sin(theta);
+
+		return sectorArea - triangleArea;
+	}
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
-		cin >> _N;
-		cin >> _text;
+
+		cin >> c1.c.x >> c1.c.y >> c1.r >> c2.c.x >> c2.c.y >> c2.r;
 	}
 
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
-		}
-		Q_SOLUTION_END();
-	}
 
+		cout << std::fixed << std::setprecision(3);
+		// 1. 두 원이 멀리 떨어져 있는 경우
+		// 2. 두 원이 접하는 경우
+		Point dir = { c2.c.x - c1.c.x, c2.c.y - c1.c.y };
+		double dist = sqrt(dir.x * dir.x + dir.y * dir.y);
+		if (dist >= c1.r + c2.r) {
+			cout << "0.000";
+		}
+		// 2. 한 원이 다른 원을 포함하는 경우
+		else if (dist)
+
+			// 4. 두 원이 겹치는 경우
+
+			Q_SOLUTION_END();
+	}
 	virtual void Delete() {
+
 	}
 };
-
 /*--------------------
 * main
 --------------------*/

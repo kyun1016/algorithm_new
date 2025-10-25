@@ -30,6 +30,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,11 +210,8 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 14601;
+constexpr int Q_COUNT = 2;
 
 class QSolve : public QBase
 {
@@ -233,23 +232,120 @@ private:
 	using ll = long long;
 	constexpr static int INF = 1000000007;
 
-	int _N;
-	std::string _text;
+	int _K, _x, _y;
+	struct drain
+	{
+		int row;
+		int col;
+	} _drain;
+	int _boardSize;
+	int tileNumber;
+	std::vector<std::vector<int>> _board;
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
-		cin >> _N;
-		cin >> _text;
+		cin >> _K >> _x >> _y;
+	}
+
+	void divideAndConquer(int startRow, int startCol, int size, int holeRow, int holeCol) {
+		if (size == 2) {
+			// 기저 조건: 2×2 크기
+			// 구멍이 아닌 3개의 칸을 현재 타일 번호로 채움
+			for (int i = startRow; i < startRow + 2; i++) {
+				for (int j = startCol; j < startCol + 2; j++) {
+					if (_board[i][j] == 0) {
+						_board[i][j] = tileNumber;
+					}
+				}
+			}
+			tileNumber++;
+			return;
+		}
+
+		int halfSize = size / 2;
+		int centerRow = startRow + halfSize;
+		int centerCol = startCol + halfSize;
+		int currentTile = tileNumber++;
+
+		// 1사분면
+		if (holeRow < centerRow && holeCol >= centerCol) {
+		}
+		else {
+			_board[centerRow - 1][centerCol] = currentTile;
+		}
+		// 2사분면
+		if (holeRow < centerRow && holeCol < centerCol) {
+		}
+		else {
+			_board[centerRow - 1][centerCol - 1] = currentTile;
+		}
+		// 3사분면
+		if (holeRow >= centerRow && holeCol < centerCol) {
+		}
+		else {
+			_board[centerRow][centerCol - 1] = currentTile;
+		}
+		// 4사분면
+		if (holeRow >= centerRow && holeCol >= centerCol) {
+		}
+		else {
+			_board[centerRow][centerCol] = currentTile;
+		}
+
+		// 1사분면
+		if (holeRow < centerRow && holeCol >= centerCol) {
+			divideAndConquer(startRow, centerCol, halfSize, holeRow, holeCol);
+		}
+		else {
+			divideAndConquer(startRow, centerCol, halfSize, centerRow - 1, centerCol);
+		}
+		// 2사분면
+		if (holeRow < centerRow && holeCol < centerCol) {
+			divideAndConquer(startRow, startCol, halfSize, holeRow, holeCol);
+		}
+		else {
+			divideAndConquer(startRow, startCol, halfSize, centerRow - 1, centerCol - 1);
+		}
+		// 3사분면
+		if (holeRow >= centerRow && holeCol < centerCol) {
+			divideAndConquer(centerRow, startCol, halfSize, holeRow, holeCol);
+		}
+		else {
+			divideAndConquer(centerRow, startCol, halfSize, centerRow, centerCol - 1);
+		}
+		// 4사분면
+		if (holeRow >= centerRow && holeCol >= centerCol) {
+			divideAndConquer(centerRow, centerCol, halfSize, holeRow, holeCol);
+		}
+		else {
+			divideAndConquer(centerRow, centerCol, halfSize, centerRow, centerCol);
+		}
 	}
 
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
+
+		tileNumber = 1;
+		_boardSize = 1 << _K; // 2^K
+		_board.assign(_boardSize, std::vector<int>(_boardSize, 0));
+
+		_drain.row = _boardSize - _y;
+		_drain.col = _x - 1;
+
+		_board[_drain.row][_drain.col] = -1;
+
+		divideAndConquer(0, 0, _boardSize, _drain.row, _drain.col);
+
+		for (int i = 0; i < _boardSize; i++) {
+			for (int j = 0; j < _boardSize; j++) {
+				cout << _board[i][j];
+				if (j < _boardSize - 1) cout << " ";
+			}
+			cout << "\n";
 		}
+
 		Q_SOLUTION_END();
 	}
 

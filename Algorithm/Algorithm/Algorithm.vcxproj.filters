@@ -94,6 +94,9 @@
     <Filter Include="Header Files\Solve">
       <UniqueIdentifier>{75bbb2d2-b8ab-427a-bea8-4ba320e073cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Stack">
+      <UniqueIdentifier>{e7070f26-18b6-43b6-9bac-86be88bf2f6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -430,6 +433,36 @@
     </ClInclude>
     <ClInclude Include="Solve_Q31836.h">
       <Filter>Header Files\Solve</Filter>
+    </ClInclude>
+    <ClInclude Include="solve_Qxxxxx.h">
+      <Filter>Header Files\Solve</Filter>
+    </ClInclude>
+    <ClInclude Include="DP_Q14601.h">
+      <Filter>Header Files\DP</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack_Q17299.h">
+      <Filter>Header Files\Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="String_Q1165.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SegmentTree_Q15678.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityQueue_Q15678.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack_Q33918.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry_Q20149(선분교차3).h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="기하_Q1069.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="기하_Q7869.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

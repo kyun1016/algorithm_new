@@ -15,6 +15,7 @@
 #include <limits>
 #include <vector>
 #include <climits>
+#include <deque>
 
 #include <numeric>
 #include <sstream>
@@ -30,6 +31,8 @@
 #include <array>
 
 #pragma region BOJHelper
+#define OUT
+#define IN
 
 #if defined(DEBUG) || defined(_DEBUG)
 #include <io.h>
@@ -208,11 +211,9 @@ protected:
 };
 #pragma endregion BOJHelper
 
-#define OUT
-#define IN
-
-constexpr int Q_NAME = 25288;
-constexpr int Q_COUNT = 1;
+constexpr int Q_NAME = 1069;
+constexpr int Q_COUNT = 10
+;
 
 class QSolve : public QBase
 {
@@ -226,37 +227,40 @@ public: // Singleton
 		return gQBase;
 	}
 private:
-	using uint = std::uint32_t;
-	using integer = std::int32_t;
-	using iter = std::list<std::int32_t>::iterator;
-	using ull = unsigned long long;
-	using ll = long long;
-	constexpr static int INF = 1000000007;
-
-	int _N;
-	std::string _text;
+	int X, Y, D, T;
 private:
 	virtual void Input()
 	{
 		Q_INPUT_BEGIN();
-		cin >> _N;
-		cin >> _text;
+
+		cin >> X >> Y >> D >> T;
 	}
 
 	virtual void Solution()
 	{
 		Q_SOLUTION_BEGIN();
-		for (int i = 0; i < _N; ++i)
-		{
-			cout << _text;
+
+		double dist = sqrt(X * X + Y * Y);
+		double result = dist;
+
+		int cnt = static_cast<int>(dist / D);
+
+		result = std::min(result, cnt * T + (dist - (cnt * D)));
+		if (cnt == 0) {
+			result = std::min(result, T + static_cast<double>(D - dist));
+			result = std::min(result, static_cast<double>(2 * T));
 		}
+		else
+			result = std::min(result, static_cast<double>((cnt + 1) * T));
+
+		cout << std::fixed << std::setprecision(9) << result;
+
 		Q_SOLUTION_END();
 	}
-
 	virtual void Delete() {
+
 	}
 };
-
 /*--------------------
 * main
 --------------------*/
