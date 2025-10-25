@@ -238,10 +238,22 @@ private:
     {
         Q_SOLUTION_BEGIN();
 
-		string a;
-		a = 1;
-		a = a + to_string(1);
-		cout << a;
+		string s = "";
+		int lo = 0;
+		int hi = 0;
+		int ret = 0;
+		vector<bool> visited(26, false);
+		for (hi = 0; hi < s.size(); ++hi) {
+			int idx = s[hi] - 'a';
+			if (!visited[idx])
+				ret = ret > (hi - lo + 1) ? ret : (hi - lo + 1);
+			else
+				while (visited[idx])
+					visited[s[lo++] - 'a'] = false;
+			visited[idx] = true;
+		}
+
+		cout << ret;
 
         Q_SOLUTION_END();
     }
