@@ -239,6 +239,7 @@ private:
         Q_SOLUTION_BEGIN();
 
 		string s = "";
+		s.reserve
 		int lo = 0;
 		int hi = 0;
 		int ret = 0;
